@@ -1,0 +1,186 @@
+Known Vulnerabilities Introduced By Coding
+
+1. Buffer overflow
+
+2. Integer overflow
+
+3. Format String Attacks
+
+4. Command injection
+
+5. Cross-site scripting
+
+6. Cross-site request forgery
+
+7. SQL injections
+
+8. Insecure direct object reference
+
+9. Improper error handling and information leakage
+
+10.Insecure storage and improper use of cryptography
+
+11.Time of check vs. time of use (race condition)
+
+------------------------------
+
+Secure architecture and design
+
+1. Threat modeling
+ //Threat modeling seeks to describe and develop the pertinent threats
+
+2. Secure design consideration(Security Design Patterns)
+ //This phase integrates solutions to all possible potential threats into the design itself
+
+-----------------------------
+
+Software security testing
+
+1.Code review (CodeCollaborator)
+ //Use source code review tools to examine source code and find security flaws
+ >http://smartbear.com/products/software-development/code-review/code-review-tool-1
+	
+
+2.Penetration testing
+ //A penetration tester performs black box testing to evaluate the security measures of the application
+
+3.Fuzz testing
+ //Fuzz testing means testing the application against malformed data to see how it reacts
+ 
+--------------------------------
+
+General Secure Coding Guidelines
+
+
+1.Efficient input validation is mandatory. 
+	-Good practice suggests sanitizing every userentered input. 
+	-Best practice is to create a ‘white list’ of expected known good input parameters and formats, rather than relying on a ‘black list’ of known bad inputs.
+
+2.Practicing sound software design and other phases of software engineering facilitates a structured, small, and simple code . In addition, use a secure coding checklist.
+	:Security Design Patterns(attached > Secure_Design_Pattern-09tr010.pdf)
+
+3.In order to track changes made to the code or document, use version/configuration control.
+
+4.Never trust the input to SQL statements. 
+	-Use parameterized SQL statements. 
+	-Do not use string concatenation or string replacement to build SQL statements.
+
+5.Use libraries to protect against security bugs during web application development.(e.g., anti-cross site scripting library) 
+	-Test the code with a web application scanner to detect vulnerabilities.
+	
+	:Stronger Anti Cross-Site Scripting (XSS) Filter for Java Web Apps
+	>http://java.dzone.com/articles/stronger-anti-cross-site
+
+	:Cross-site scripting
+	>http://www.ibm.com/developerworks/tivoli/library/s-csscript/#figure1
+
+
+6.Good practice also recommends use of the latest compilers, which often include defenses against coding errors
+
+7.security design patterns can be used to tackle similar security-related concerns and provide solutions to known problems.
+	:Security Design Patterns(attached > Secure_Design_Pattern-09tr010.pdf)
+
+8.It is good practice to code with proper error/exception handling. 
+	-Check the return values of every function (especially security-related functions) 
+	-check for leakage of sensitive information to untrusted users.
+
+9.Make a security policy that prohibits the use of banned functions that make the code weak.
+	-Encourage a process of peer code reviews and sound security testing
+
+10.Encode HTML input. 
+	-Attackers use malicious input to conduct XSS types of attacks. 
+	-Encoding of every user-supplied input can prevent the client’s web browser from interpreting these as executable code. 
+	-Do not store sensitive data in cookies.
+
+11.Encrypt all confidential data using strong cryptographic techniques. 
+	-Handle key management carefully. 
+	-Use a published and strong cryptographic algorithm with a sufficiently long key. 
+	-Use of FIPS-approved cryptographic algorithms is encouraged. 
+	-Do not use security protocols with inherent cryptographic weakness and cryptographically weak random numbers.
+
+12.keeping informed about known and new vulnerabilities and software bugs 
+	-By reading security-related forums, magazines, research papers, and newsletters.
+
+13.Every organization must educate its developers on how to write secure code, 
+	-By offering a seminar or training session. 
+	-The training should cover strategies and best practices to mitigate common threats. 
+	-Additional emphasis should be given to the security features of programming languages and how to implement those features to build a secure application.
+
+---------------------------------
+
+Programming language-specific guidelines (Secure coding practices in Java)
+
+
+1.Validate input: 
+	-avoid command injections, overflow conditions, and format string attacks
+	-always make a safe copy of input and validate it.
+
+2.Limit accessibility and extensibility: 
+	-Initially declare all classes, methods, interfaces, and fields as private. 
+	-Change the access type to protected or public only if necessary. 
+	-Declare the classes, methods, and fields final. 
+	-In case of inheritance, change the declaration to non-final. 
+	-To limit access to a public, non-final class, impose a SecurityManager check for each subclass.
+
+3.Understand the effect of a superclass on a subclass: 
+	-Changes made to a superclass can affect the behavior of a subclass and introduce vulnerabilities. 
+	-These changes need to be well understood.
+
+4.Create a copy of instances of a mutable class, mutable inputs, and outputs: 
+	-Create a copy of instances of a mutable class to ensure that instances are securely passed to (and returned from) methods in other classes [07]. 
+	-If the method is not meant to deal with mutable inputs and outputs directly, create a copy of it. 
+	-Otherwise, an unsafe caller can modify the output to invoke a race condition.
+
+5.Define Java wrapper methods around native methods: 
+	-Unlike Java code, native methods are not safe from buffer overflows and are not supervised by the SecurityManager. 
+	-Declare the native method as private and wrap it in a Java-based public method which can be used to conduct input validation and a SecurityManager check [07].
+
+6.Access internal modifiable state via a wrapper method: 
+	-A publicly accessible internal modifiable state should be declared as private. 
+	-Define a public wrapper method around it to enforce a SecurityManager check. 
+	-Define a protected wrapper method if the internal state is accessed only by subclasses.
+
+7.Use public static fields for defining a constant: 
+	-Use a public static field for storing an immutable value and declare it ‘final’ so that its value cannot be altered.
+
+8.Sanitize exceptions: 
+	-Check for exceptions that leak internal sensitive information. 
+	-Catch and throw such exceptions with a sanitized message.
+
+9.Avoid using security-sensitive classes: 
+	-A security-sensitive class, for example, ClassLoader, can circumvent SecurityManager access control. 
+	-enforce a SecurityManager check at all points where the class is instantiated.
+
+10.Make sure that an instance of a non-final class is fully initialized: 
+	-Ensure that an instance of a non-final class is not partially-initialized, because an attacker can access it. 
+	-The developer can set an initialized flag (Boolean type) at the end of a constructor before returning successfully.
+
+11.Prevent constructors from calling a method that can be overridden: 
+	-Do not call methods that can be overridden from a constructor, 
+	(since it gives reference to the object being constructed before the object is fully initialized)
+
+12.Be careful about serialization and deserialization: 
+//Attackers can access private fields of a serialized class and Java access control cannot be enforced
+	-Do not serialize sensitive data in a serialized class. 
+	-In case of default serialization, declare the sensitive data as transient.
+	-Check input validation; 
+	-Assign default values that are the same as those assigned in the constructor during deserialization 
+	(because it creates a new instance of a class without calling the constructor)
+	-Enforce SecurityManager checks in serialized classes and during deserialization.
+
+13.Stay alert for standard APIs and methods that can bypass access control or security checks: 
+	-Do not call AccessController.doPrivileged using tainted input, because it allows the code to apply its own permissions during a SecurityManager check.
+	-Methods such as Class.newInstance could bypass the SecurityManager check, depending on the immediate caller’s class loader. 
+	-Do not invoke the following methods on Class, ClassLoader, or Thread instances provided by untrusted code.
+
+14.Use char array or byte array instead of String() to store passwords: 
+//String() is immutable. Even if it is deleted, its object keeps floating in memory and clear sensitive information.
+
+15.Be cautious when dealing with multiple threads: 
+//If the code is using multithreading without proper synchronization, it is possible that all threads will manipulate the same data simultaneously, resulting in an unpredictable behavior of the program.
+	-Make sure that the code is synchronized to handle multiple processes. 
+	-Organize code in such a way that one piece of data is manipulated by one thread at a time.
+	-Use semaphore to indicate data is ready for another thread’s consumption.
+	-Use the paint method for all your drawings, 
+	-use the paint method to set flags that indicate objects to be painted
+	-use run loop to draw.
