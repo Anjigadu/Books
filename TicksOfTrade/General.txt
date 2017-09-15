@@ -1,0 +1,27 @@
+Maven Artifact ID is the name of the jar created
+Maven Group ID is similar to the package in java. It can be the reverse name of the package.
+The fully qualified name of a artifact is a group+artifact+version.
+
+google guava are common utility libraries from google. It has APIs for collection, caching, IO et al.
+
+gradle is a new build script. It combines declarative dependencies with programmable custom logic.
+
+
+Spring boot
+
+@Controller marked above a class makes it detected as a Spring bean when @ComponentScan scans the classpath.
+
+@EnableAutoConfiguration - configures application based on dependencies available on the classpath.
+
+@ComponentScan activates the scanning for classes which should be added to the applicationContext.
+
+application.yaml for property Configuration. For data such as database location. How to integrate the yaml with the code ? TODO
+
+Eclipse Shortcuts
+Ctrl+3 goes to the quick access
+Ctrl+space helps auto complete
+
+
+dir "C:\folder\*" /s/b provides the full path filenames
+
+alt + mouse down is the block copy in notepad++

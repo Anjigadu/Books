@@ -1,0 +1,78 @@
+import java.io.BufferedInputStream;
+
+import java.io.BufferedOutputStream;
+
+import java.io.File;
+
+import java.io.FileInputStream;
+
+import java.io.FileOutputStream;
+
+import java.io.IOException;
+
+import java.io.InputStream;
+
+import java.io.OutputStream;
+
+import java.net.URI;
+
+import java.net.URISyntaxException;
+
+
+import org.apache.hadoop.conf.Configuration;
+
+import org.apache.hadoop.fs.FSDataInputStream;
+
+import org.apache.hadoop.fs.FSDataOutputStream;
+
+import org.apache.hadoop.fs.FileSystem;
+
+import org.apache.hadoop.fs.Path;
+
+import org.apache.hadoop.io.IOUtils;
+
+
+
+@SuppressWarnings("unused")
+
+public class HDFSCreate 
+{
+
+
+public static void main(String[] args) throws IOException,URISyntaxException 
+{
+		
+		
+Configuration conf = new Configuration();
+        
+URI uri = new URI("hdfs://localhost:54310");
+       
+FileSystem fileSystem = FileSystem.get(uri,conf);
+      
+boolean flag = fileSystem.mkdirs(new Path("hdfs://localhost:54310/usr/TestDir2"));
+if(flag)
+	
+{
+			
+System.out.println("Success");
+		
+}
+		
+else
+		
+{
+			
+System.out.println("failed");
+		
+}
+			
+		
+}
+		
+       
+       
+
+	
+}
+
+

@@ -1,0 +1,76 @@
+
+1.  Enter your name and reference if you have one (RMUK12345AB): 
+
+ 
+
+
+
+
+
+ 2.  What is the role of a secondary namenode and what does it do? 
+
+ 
+
+
+
+
+
+ 3.  In an scenario where we receive raw files in a server and we do need to have tables created from that, could you explain how would you create that  ingestion process that runs automatically in a daily? Please describe the modules used and potential parameters needed. 
+
+ 
+
+
+
+
+
+ 4.  System wise, what are the main similarities and differences between a MR process and a Spark one? 
+
+ 
+
+
+
+
+
+ 5.  Describe a process to load 1 mill records in one go in Hbase and describe why do you think is the best option including performance analysis. 
+
+ 
+
+
+
+
+
+ 6.  Can you describe and an example of how to pass the ‘date’ to a oozie task? 
+
+ 
+
+
+
+
+
+ 7.  What classes would you use and how would you connect using the API for Hbase provided in java? Is there another way of getting info from Hbase from an external application? Explain what and how. 
+
+ 
+
+
+
+
+
+ 8.  What would you use in Java to log into Kerberos for Hadoop? What modules/files do you need for that? 
+
+ 
+
+
+
+
+
+ 9.  How would you synchronize Hbase and Solr having in mind a real time feed? 
+
+ 
+
+
+
+
+
+ 10.  Write a small code for spark, preferably in scala to count the lines of the file and count the lines that start with character “A”. 
+
+ 

@@ -1,0 +1,15 @@
+Single responsibility principle
+ONE PERSON ONE JOB
+
+Open/closed principle
+should be open for extension, but closed for modification
+
+
+Liskov Substitution Principle (LSP)
+Functions that use references to base classes must be able to use objects of derived classes without knowing it. EXAMPLE : WHEN U USE LIST OF TOP CLASS, HIDE THE FACT THAT IT COULD BE ARRAYLIST OR ANY OTHER LIST
+
+Interface segregation principle
+many client-specific interfaces are better than one general-purpose interface. EXAMPLE : TOUCHPOINT -> INTERNET, MOBILE, PAPER, CALL CENTER
+
+Dependency inversion principle
+Depend upon Abstractions. Do not depend upon concretions. EXTEND ABSTRACT CLASSES.

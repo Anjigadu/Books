@@ -1,0 +1,197 @@
+We have received your payment of £3800.00 for service SET (O). Thank you.
+
+UKV&I Reference Number: SHCA10-3492-5238-35ZI
+WorldPay Transaction ID: 4735073018
+ 
+ 
+
+Please print this page for you records. We have also sent this to you in an email. 
+
+
+Ubuntu
+https://www.youtube.com/watch?v=I5cV0V7vLJw
+https://forums.virtualbox.org/viewtopic.php?f=3&t=15868
+rajesh@rajesh-VirtualBox:~/WindowsShared$ sudo mount -t vboxsf UbuntuShared //home/rajesh/WindowsShared
+
+
+Untar a file in the location.
+tar xvzf file.tar.gz
+http://www.hostingadvice.com/how-to/untar-file-linuxubuntu/
+
+Vi Editor
+http://www.lagmonster.org/docs/vi.html
+The VI has two modes : Command mode and insert mode. Command mode takes instructions. Insert mode takes text input.
+Use Esc to get into command mode. Use Esc followed by i to get into insert mode.
+See the above link for the rest of the commands.
+Also, explore the option of editing in windows and move back the file to the required location.
+
+How to install JDK 8 manually?
+http://askubuntu.com/questions/521145/how-to-install-oracle-java-on-ubuntu-14-04
+
+Enter file in which to save the key (/home/hduser/.ssh/id_rsa): rsakeyfile
+
+
+The following command would show the hidden file.
+ls -la ~/ | more
+.bashrc would be visible in home after the above command
+
+
+nano ~/.bashrc
+You can save it manually with F3
+Ctrl+x to exit
+
+The Hadoop 2.x (2.2.0) Configuration
+http://codesfusion.blogspot.co.uk/2013/10/setup-hadoop-2x-220-on-ubuntu.html
+
+The Hadoop 2.x (2.7.0) Configuration
+https://rstudio-pubs-static.s3.amazonaws.com/78508_abe89197267240dfb6f4facb361a20ed.html
+
+If you get a error as E212: Can't open file for writing,
+instead of vi <file name>, try
+sudo vi <filename>
+
+Ctrl+Alt+T for Terminal
+
+su - hduser    -> to change to the hduser
+
+rename a file or folder
+mv /home/user/oldname /home/user/newname
+
+delete a file
+rm <file name>
+
+delete a non-empty folder
+sudo rm -r -f /usr/lib/eclipse
+
+password rajesh
+users hduser and rajesh
+
+namenode and datanode are created here
+sudo mkdir -p /usr/hadoop-inst/hadoop-store/hdfs/namenode
+sudo mkdir -p /usr/hadoop-inst/hadoop-store/hdfs/datanode
+
+In order to start hadoop, use the following commands :
+hduser@rajesh-VirtualBox:/usr/hadoop-inst/hadoop-2.7.1$ sbin/start-dfs.sh
+
+hduser@rajesh-VirtualBox:/usr/hadoop-inst/hadoop-2.7.1$ sbin/start-yarn.sh
+
+Install Maven in Ubuntu
+http://www.mkyong.com/maven/how-to-install-maven-in-ubuntu/
+
+whereis mvn
+<displays the location>
+
+locate maven
+/usr/share/maven-repo/
+<displays maven repository>
+Apache Maven 3.0.5
+Maven home: /usr/share/maven
+Java version: 1.8.0_65, vendor: Oracle Corporation
+Java home: /usr/lib/jvm/jdk1.8.0_65/jre
+Default locale: en_GB, platform encoding: UTF-8
+OS name: "linux", version: "3.19.0-42-generic", arch: "amd64", family: "unix"
+
+Hadoop 2.7.1
+Subversion https://git-wip-us.apache.org/repos/asf/hadoop.git -r 15ecc87ccf4a0228f35af08fc56de536e6ce657a
+Compiled by jenkins on 2015-06-29T06:04Z
+Compiled with protoc 2.5.0
+From source with checksum fc0a1a23fc1868e4d5ee7fa2b28a58a
+This command was run using /usr/hadoop-inst/hadoop-2.7.1/share/hadoop/common/hadoop-common-2.7.1.jar
+
+
+Advanced Package Tool apt-get commands
+http://www.tecmint.com/useful-basic-commands-of-apt-get-and-apt-cache-for-package-management/
+sudo apt-get --purge autoremove packagename -> removes an installation from Ubuntu
+
+sudo apt-get purge openjdk* -> Good one to remove openjdk
+
+http://ubuntuhandbook.org/index.php/2014/06/install-latest-eclipse-ubuntu-14-04/
+Eclipse Mars is installed in /opt/eclipse
+Maven is installed in /usr/share/maven
+Maven 3.3.3 is also embedded in eclipse
+
+----------------------
+How to improve productivity?
+
+Eclipse Plugin
+Browse the file system from the Hadoop Namenode console.
+MR Unit
+-----------------------
+Nano - save is F3, exit is ctrl+x
+
+---------------------
+How to start Hadoop cluster ?
+
+---------------------
+hduser@rajesh-VirtualBox:~/hduser$ cd /usr/hadoop-inst/hadoop-2.7.1
+sudo rm -r -f /usr/hadoop-inst/hadoop-2.7.1/logs/*
+/usr/hadoop-inst/hadoop-2.7.1
+hduser@rajesh-VirtualBox:/usr/hadoop-inst/hadoop-2.7.1$ sbin/start-yarn.sh
+hduser@rajesh-VirtualBox:/usr/hadoop-inst/hadoop-2.7.1$ sbin/start-dfs.sh
+
+See the cluster info in http://localhost:8088/
+See the Name Node info in http://localhost:50070/
+
+Delete the contents in input folder, if required
+hadoop fs -rm /usr/hadoop-inst/my-local-store/inputfileslocal/*
+
+Copy the input file in the hdfs hopper
+hadoop fs -copyFromLocal /usr/hadoop-inst/my-local-store/inputfileslocal/Hello.txt hdfs:///tmp/input
+
+Find out the content in the default hdfs directory, and check if the output directory does not exist. 
+hadoop fs -ls hdfs:///tmp/input
+
+If the output exists, and if you want to use the same name for output folder, delete the existing one
+hadoop fs -rm hdfs:///tmp/output/*
+hadoop fs -rmdir hdfs:///tmp/output
+
+If you want to view the contents of a jar, use the following command:
+jar tf /usr/hadoop-inst/hadoop-pgms/WordCounter.jar
+jar tf /usr/hadoop-inst/hadoop-pgms/WordCounter.jar >/usr/hadoop-inst/hadoop-pgms/temp.txt
+
+Execute the jar
+hduser@rajesh-VirtualBox:/usr/hadoop-inst$ hadoop jar /usr/hadoop-inst/hadoop-pgms/WordCounter.jar hdfs:///tmp/input hdfs:///tmp/output
+
+To access the logs
+http://localhost:50070/ Utilities->Logs
+ 
+To access the output
+http://localhost:50070/ Utilities-> Browse the file system -> <Enter / in the text area> -> Click tmp
+
+Or Copy the output to a local system to access
+hadoop fs -ls hdfs:///tmp/output
+hadoop fs -get hdfs:///tmp/output/part-r-00000 /usr/hadoop-inst/my-local-store/outputfileslocal
+Assumption : part-r-00000 is the output file.
+
+nano /usr/hadoop-inst/my-local-store/outputfileslocal/part-r-00000
+--------------------
+
+How to start Pig grunt shell?
+---
+mr-jobhistory-daemon.sh start historyserver
+
+after starting the yarn and dfs, pig -brief
+it automatically connects with the hdfs
+-------------
+hadoop fs -ls hdfs:///tmp/input
+
+hadoop fs -rm hdfs:///tmp/input/*
+
+hadoop fs -copyFromLocal /usr/hadoop-inst/my-local-store/inputfileslocal/Temperature.txt hdfs:///tmp/input
+
+hadoop fs -ls hdfs:///tmp/input
+
+In Grunt shell,
+a = LOAD 'hdfs:///tmp/input/Temperature.txt' AS (user:chararray, timestamp:int, query:int);
+
+-----------------------
+How to start HBase ?
+start-hbase.sh
+http://localhost:16010/master-status#baseStats
+
+stop-hbase.sh
+----------------
+How to start hive?
+hive
+goes to the hive shell
+--------------

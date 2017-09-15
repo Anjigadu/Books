@@ -1,0 +1,6 @@
+100% TDD test coverage - Use EclEmma
+Write more BDD tests
+Sonar clean
+Write a readme that has a checklist with the instructions.
+interface and service has to be in a differnt places
+if there is another interface, that is used as a third party interface, place the third party interface in a separate package as an indicator that there is a distance. f

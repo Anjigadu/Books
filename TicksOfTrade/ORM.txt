@@ -1,0 +1,30 @@
+JPA is the dance, Hibernate is the dancer.
+
+
+JPA is just a specification, meaning there is no implementation. You can annotate your classes as much as you would like with JPA annotations, however without an implementation nothing will happen. Think of JPA as the guidelines that must be followed or an interface, while Hibernate's JPA implementation is code that meets the API as defined by the JPA specification and provides the under the hood functionality.
+
+When you use Hibernate with JPA you are actually using the Hibernate JPA implementation. The benefit of this is that you can swap out Hibernate's implementation of JPA for another implementation of the JPA specification. When you use straight Hibernate you are locking into the implementation because other ORMs may use different methods/configurations and annotations, therefore you cannot just switch over to another ORM.
+
+
+
+What are the core interfaces of Hibernate?
+
+The core interfaces of Hibernate framework are:
+•Configuration
+•SessionFactory
+•Session
+•Query
+•Criteria
+•Transaction
+
+
+Criteria is like Expression Builder
+
+
+What is the difference between first level cache and second level cache?
+
+1) First Level Cache is associated with Session. Second Level Cache is associated with SessionFactory. 
+2) First Level Cache is enabled by default. Second Level Cache is not enabled by default. 
+
+
+http://www.javatpoint.com/hibernate-interview-questions

@@ -1,0 +1,117 @@
+http://blog.csdn.net/macyang/article/details/8546941
+
+
+Major Design Elements
+
+There is a small number of major design decisions that make Kafka different from most other messaging systems:
+1.Kafka is designed for persistent messages as the common case
+2.Throughput rather than features are the primary design constraint
+3.State about what has been consumed is maintained as part of the consumer not the server (I think ZooKeeper also maintains the consumed state, plays its part in revival from failover)
+4.Kafka is explicitly distributed. It is assumed that producers, brokers, and consumers are all spread over multiple machines.
+
+
+Kafka is optimized for TIME ordered publish subscribe, while the traditional brokers are having a big feature set, which is rarely used, but which impedes performance.
+
+It's not a message broker, but rather the backend for such a broker. Kafka does not guarantee exactly once processing, it is at least once(in general). Kafka's data is read using an offset within a partition. 
+Reading from Kafka is like reading a file line by line - you only track the offset and decide how to handle acknowledgement and failures. Writing to Kafka is like appending to a file.
+Take note that committing offset to ZooKeeper on each entry degrades performance beyond what a message broker would be capable of.
+
+Message Queues are that - queues.
+
+
+Kafka does not offer jms semantics like acknowledgments
+
+
+
+http://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html
+
+http://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html
+
+Message is ProducerRecord, a key value pair
+
+partition is 
+
+acknowledgement is mentioned in acks option
+The acks config controls the criteria under which requests are considered complete. The "all" setting we have specified will result in blocking on the full commit of the record, the slowest but most durable setting. 
+
+0, which means that the producer never waits for an acknowledgement from the broker (the same behavior as 0.7). This option provides the lowest latency but the weakest durability guarantees (some data will be lost when a server fails). 
+• 1, which means that the producer gets an acknowledgement after the leader replica has received the data. This option provides better durability as the client waits until the server acknowledges the request as successful (only messages that were written to the now-dead leader but not yet replicated will be lost). 
+• -1, which means that the producer gets an acknowledgement after all in-sync replicas have received the data. This option provides the best durability, we guarantee that no messages will be lost as long as at least one in sync replica remains. 
+https://kafka.apache.org/08/configuration.html
+
+acks is linked with replication functionality.
+
+in jms, every message can be of any type - text message or any Object message. in kafka, the deserializer is part of the config of the consumber. so the k, v type has to be same.
+
+thers is also a concept of listen by offest, partition by offset. - Important
+
+subssriber can listen to multiple topics
+
+Every listen is a collection of ConsumerRecords
+     KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+     consumer.subscribe(Arrays.asList("foo", "bar"));
+     while (true) {
+         ConsumerRecords<String, String> records = consumer.poll(100);
+         for (ConsumerRecord<String, String> record : records)
+             System.out.printf("offset = %d, key = %s, value = %s", record.offset(), record.key(), record.value());
+     }
+There may be more than one record dispatched if available.
+
+Kafka interview questions
+http://career.guru99.com/top-14-kafka-interview-questions/
+
+Topic  =   Topic
+Publisher = Producer
+Subscriber = KafkaConsumer
+MesssagID = Offset
+Server = Broker
+Messaging System = Distributed commit log service
+Message = ProducerRecord, ConsumerRecords
+
+
+The Kafka cluster retains all published messages—whether or not they have been consumed—for a configurable period of time. For example if the log retention is set to two days, then for the two days after a message is published it is available for consumption, after which it will be discarded to free up space. Kafka's performance is effectively constant with respect to data size so retaining lots of data is not a problem. 
+
+In fact the only metadata retained on a per-consumer basis is the position of the consumer in the log, called the "offset". This offset is controlled by the consumer: normally a consumer will advance its offset linearly as it reads messages, but in fact the position is controlled by the consumer and it can consume messages in any order it likes. For example a consumer can reset to an older offset to reprocess. 
+
+This combination of features means that Kafka consumers are very cheap—they can come and go without much impact on the cluster or on other consumers. For example, you can use our command line tools to "tail" the contents of any topic without changing what is consumed by any existing consumers. 
+
+The partitions in the log serve several purposes. First, they allow the log to scale beyond a size that will fit on a single server. Each individual partition must fit on the servers that host it, but a topic may have many partitions so it can handle an arbitrary amount of data. Second they act as the unit of parallelism—more on that in a bit. 
+
+Active MQ 4.x uses JDBC/derby, leveldb to persist messages
+Kafka uses flatfile
+
+Active MQ throughput is 2000 -5000 messages/seconds
+Kafka can take a firehose of 165,0000 messages/seconds
+
+ActiveMQ uses AMQP
+Kafka has a distributed, partitioned, persistent atleast-one framework
+
+
+partitions  OK
+commits OK
+Consumer
+ConsumerGroup 
+Replications 
+and clean
+
+event emitters (or agents), event consumers (or sinks), and event channels
+Different Notions of Time - System Time, Event Time (independent of the system time of the machines), Ingress Time (time that they entered the system)
+Watermarks (t to t+5) t+5 is the watermark for the windowing
+https://kafka.apache.org/090/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html
+
+
+https://github.com/apache/storm/tree/master/external/storm-kafka
+
+How KafkaSpout stores offsets of a Kafka topic and recovers in case of failures
+
+As shown in the above KafkaConfig properties, you can control from where in the Kafka topic the spout begins to read by setting  KafkaConfig.startOffsetTime  as follows:
+1. kafka.api.OffsetRequest.EarliestTime() : read from the beginning of the topic (i.e. from the oldest messages onwards)
+2. kafka.api.OffsetRequest.LatestTime() : read from the end of the topic (i.e. any new messsages that are being written to the topic)
+3.A Unix timestamp aka seconds since the epoch (e.g. via  System.currentTimeMillis() ): see How do I accurately get offsets of messages for a certain timestamp using OffsetRequest? in the Kafka FAQ
+
+As the topology runs the Kafka spout keeps track of the offsets it has read and emitted by storing state information under the ZooKeeper path  SpoutConfig.zkRoot+ "/" + SpoutConfig.id . In the case of failures it recovers from the last written offset in ZooKeeper.
+
+
+Failover
+https://cwiki.apache.org/confluence/display/KAFKA/Kafka+Replication#KafkaReplication-Followerfailure
+

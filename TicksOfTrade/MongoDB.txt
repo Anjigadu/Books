@@ -1,0 +1,284 @@
+https://speakerdeck.com/abchaudhri/selecting-a-nosql-database-from-a-menu-of-over-200-products-1
+
+C:\OCMJEE\mongodb\bin>mongod  --dbpath C:\OCMJEE\mongodb\data --journal
+
+Why NoSQL ?
+Some applications need few database features, but need high scale
+
+Desire to avoid schema/data pre design altogether for simple applications
+
+Need for low latency API access to data
+
+Simplicity - do not need fancy indexing - just fast lookup by primary indexing
+
+--------------------
+
+Categories of NoSQL based on the Data Models
+
+Key Value Store = redis, riak  (Like a Hash Map, the value can be any type - image, binary, text document)
+Coloumn store = Cassandra, HBase, marklogic
+Document Store = MongoDB, CouchDB
+Graph Store = Neo4J, InfiniteDB
+
+---------------------
+
+Key Value is Key : Binary Data 
+Coloumn Store Row and Coloumns are inverted for easier calculations such as sum, count, max...
+Document Store is Key : Collection of KV
+Graph Store is Social media kinds of relationship
+
+--------------------
+Mongo DB
+Protocol Propreitary
+API/Query BSON
+Replication M-S, Shard
+-------------- 
+
+Document Store
+* Represent rich, hierarchial data structures, reducing the need for multi-table joins.
+* Structure of the documents need not be known before, can be variable, and evolve instantly, but a query can understand the contents of a document.
+* Use cases: rapid ingest and delivery of evolving schemas and web based objects. 
+
+---------------
+
+MongoDB Example
+
+{
+ "namespace1" :any json object,
+ "namespace2" :any json object,
+ ....
+}
+
+{
+ "namespace1" : [
+	{
+	"_id":"key 1",
+	"property1" : "value",
+	"property2" : {
+		"property3" : "value",
+		"property4" : ["value", "value", "value"]
+		},
+		....
+	},
+	....
+	]
+}	
+
+Connection
+private static final DBNAME="demodb";
+private static final COLNAME="people";
+
+MongoClient mc = new MongoClient("localhost",27017);
+DB db = mc.getDB(DBNAME);
+DBCollection dbcol = db.getCollection(COLNAME);
+
+sysout("Connected to MongoDB");
+
+-------------------
+Use Cases
+Application not constrained by fixed schema/data
+Application drives schema/data
+Ability to quickly add, change, or delete fields or data elements
+Ability to mix structured and unstructured data
+Dynamic elasticity
+-Rapid horizontal scalablity
+-Ablity to add or delete nodes dynamically
+Low cost:
+Commodity hardware
+Less need for DBAs
+-------------------
+Security threats
+Transaction integrity
+Lack of consistency
+No built in Authentication/Authorization issues
+Solution:
+Run in a trusted environment
+Application hadles security
+Use Event Sourcing to avoid transaction integrity
+-------------
+ports for mongodb
+27017, 28017, 27080
+-------------
+
+Feb 17, 2016
+MongoDB basic operations 10:00 to 11:30
+Install MongoDB and do the basic operations of CRUD 11:45 to 04:00
+Browse the 50 tricks 
+Create the MongoDB project
+interview questions in mongodb
+Listen to Spark 
+CV review the technologies
+
+--------------
+
+Replica set preferences
+Sharded Clusters - scale by partition - select the right shard keys for the partition for optimal performance
+
+
+Read Operations
+ Cursors
+ Query Optimization
+ Query Plans
+ Distributed Queries
+Write Operations
+ Write Concern
+ Distributed Write Operation
+ 
+Exclusive and Inclusive projection - 0 means exclude and 1 means include. _id is always included.
+
+mongo shell is equal to the hive shell.
+
+Embedded Document and the equivalent JSON object - Find out how to represent in JSON Object
+The relationship can be represented in either of the two forms
+References - FK Reference - to avoid duplication, but the cost of read is expensive.
+Embedded documents - Great for read. If there are more updates to the Documents, the write operations are expensive.
+
+
+Note:
+If the document size exceeds the allocated space for that document, MongoDB will relocate the document on disk. You may want to refactor your data model to use references between data in distinct documents rather than a denormalized data model.
+
+Operations are atomic at the single document level.
+
+profiler creates execution plan for a query
+
+Time To Live - for tokens : db.log_events.createIndex( { "expireAt": 1 }, { expireAfterSeconds: 0 } )
+ 
+GridFS is a specification for storing and retrieving files that exceed the BSON-document size limit of 16MB.
+Instead of storing a file in a single document, GridFS divides a file into parts, or chunks, 7 and stores each of those
+chunks as a separate document.
+
+MongoDB manual pg 130 - SQL vs MongoDB chart
+
+
+----------------
+MongoDB questions in RBS
+
+MongoDB = research how u used it?
+how u synchoronize mongobb
+apache and mongp db difference
+architecture and design
+
+
+https://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/
+http://www.slideshare.net/matkeep/migrating-from-relational-databases-to-mongodb
+https://www.mongodb.com/presentations/mongodb-days-uk-building-an-enterprise-data-fabric-at-royal-bank-of-scotland-with-mongodb
+
+----------------------
+
+Scaling MongoDB
+
+1. Optimization of queries
+ query = db.coll.find({title:"MyBlog"});
+ 
+ query.explain();
+ 
+  {
+	"cursor": "Basic Cursor", // This cursor is table scan
+	"indexBounds" : [],
+	"nscanned" : 57594,
+	"n" : 3,
+	"millis" : 108
+  }
+  
+  db.coll.ensureIndex({title:1});
+
+2. Know your working set size
+
+  Judicial use of RAM - no under or no over use
+  
+3. Tune your file system
+
+ Ext3 == bad
+ Ext4/XFS == good
+ Accesstime tracking is bad - updating access time for every read is expensive.
+ 
+4. Choose the right disks
+
+Seek time has to be good for a random IO
+
+5. Sharding for writes and RAM
+Note: Shard is equivalent to partitioning
+
+----------------------------------
+
+MongoDB is created to address two problems
+
+1. Object relational mismatch
+2. Horizontal Scalablity
+
+---------------------------------
+
+Performance
+
+master/slave replication
+replica sets
+auto sharding
+
+---------------------------------
+
+geo spatial indexing is available
+
+---------------------------------
+GridFS is the distributed file system inside MongoDB.
+
+---------------------------------
+When MongoDB is not good?
+
+Complex Multi operation transcations
+When there are multiple joins
+
+---------------------------------
+
+SQL was designed for single node systems or smaller clusters.
+SQL is NOT DESIGNED to run on cluster of 1000s of commodity machines.
+
+---------------------------------
+To execute the createDBSchema script, write the schema script in a file execute in a shell.
+mongo localhost:27017/test myjsfile.js
+
+https://docs.mongodb.org/manual/tutorial/write-scripts-for-the-mongo-shell/
+---------------------------------
+
+use tokenmanagerdb;
+
+db.createCollection("requester")
+{ "_id" : 1,
+  "domainid" : 0,
+  "tokenrange" : 1,
+  "keyindex" : 1,
+   "requestor" : {
+		"name" : "value",
+		"requestortype" : "issuer",
+		"property4" : ["value", "value", "value"]
+	},
+}
+
+db.createCollection("tokenrange")
+{ "_id" : 1,
+  "uprangeToken" : 0,
+  "downrangeToken" : 1,
+  "uprangeBin" : 0,
+  "downrangeBin" : 1
+}
+
+db.requester.createIndex( { _id: 1 } )
+db.requester.createIndex( { requestor.name: 1 , domainid: 1} )
+db.tokenrange.createIndex( { _id: 1 } )
+
+		
+Replication synchronization
+Synchronous Writes - the ack would be complete only agter
+asynchronous Writes - Faster, but there is a chance of missing data when the primary failsover. However, the data is unlikely to be lost
+
+https://www.mongodb.com/compare/mongodb-mysql
+-----------------------------
+MySQL              MongoDB
+
+Table              Collection 
+Row                Document 
+Column             Field 
+Joins              Embedded documents, linking 
+
+--------------------------------------
+
+Shards		

@@ -1,0 +1,57 @@
+import java.io.BufferedInputStream;
+	import java.io.BufferedOutputStream;
+	import java.io.File;
+	import java.io.FileInputStream;
+	import java.io.FileOutputStream;
+	import java.io.IOException;
+	import java.io.InputStream;
+	import java.io.OutputStream;
+	import java.net.URI;
+	import java.net.URISyntaxException;
+
+	import org.apache.hadoop.conf.Configuration;
+	import org.apache.hadoop.fs.FSDataInputStream;
+	import org.apache.hadoop.fs.FSDataOutputStream;
+	import org.apache.hadoop.fs.FileSystem;
+	import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IOUtils;
+
+
+	@SuppressWarnings("unused")
+		
+	public class HDFSRead 
+	{
+		
+	public static void main(String[] args) throws IOException,URISyntaxException 
+	{
+		        
+	Configuration conf = new Configuration();
+		         
+	URI uri = new URI("hdfs://localhost:54310/usr/hadoop-inst/hadoop-1.0.3/hdfspgms");
+		        
+	FileSystem fileSystem = FileSystem.get(uri,conf);
+		        
+	Path path = new Path(uri);
+		        
+	InputStream inputStream = fileSystem.open(path);
+		        
+	IOUtils.copyBytes(inputStream, System.out,4096,false);
+		        
+	IOUtils.closeStream(inputStream);
+
+		       
+		    
+	}
+
+
+	}
+
+
+
+o/p:
+
+geetha@ubuntu:/usr/hadoop-inst/hadoop-1.0.3$ hadoop jar read.jar HDFScopy
+Warning: $HADOOP_HOME is deprecated.
+
+this is the first program in hadoop
+this is copy from local to hdfs

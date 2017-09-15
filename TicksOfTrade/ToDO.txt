@@ -1,0 +1,23 @@
+mvn sonar:sonar \
+    -Dsonar.host.url=https://sonarcloud.io \
+    -Dsonar.organization=rajeshso-github \
+    -Dsonar.login=35848bff84aa517c657150908625e841c
+	
+
+Intellij
+Keymap to be mac os x
+Presentation Assist plugin
+Ctrl + N  - Search class
+Shift Ctrl N - Search file or folders, wild card
+When you are searching for file,  :40 takes to the line number
+ctrl shift alt n - Search Symbol
+Double Shift - Search everywhere
+Settings - Editor Tabs - Set to None
+Use Double Shift or Ctrl E to access the recent files
+Shift Ctrl E will show recent edited files
+Ctrl E Enter will toggle between the last two files
+Ctrl [ or Ctrl ] goes to the start or end of the bracelets
+Alt 1 for Project tab , Esc to return to the code window
+Project tab settings - AutoScroll from Source
+Shift Ctrl F12 - Hide all windows
+

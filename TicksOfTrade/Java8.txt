@@ -1,0 +1,228 @@
+Not since Java 1.5 have we seen so many fundamental changes to the Java source language itself! There’s always an eagerness to use the latest and greatest features but the new Java 8 lambdas are not only fun features but they offer serious performance enhancements with parallel stream processing.
+
+-------------------
+
+What is a functional interface?
+A functional interface is defined as any interface that has exactly one explicitly declared abstract method. 
+ 
+ Streams 
+ Pass methods as functions
+ Default methods 
+ 
+ 
+ Lambdas is annonymous function.
+ 
+ 
+ Lambdas is you write what looks like a function. Under the hood, Java converts it as an annonymous class.
+ The annonymous class has to be an interface and has to have exactly one method (otherwise java does not know which method has to be executed)
+ someButton.addActionListener(event -> handleButtonClick()), Arrays.sort(testStrings, (s1, s2)->s1.length - s2.length)
+ These interfaces are called Functional Interfaces or SAM (Single Abstract Method) interfaces
+ https://www.youtube.com/watch?v=q5i_O4Uj_O8
+ 
+ interface Executable {
+  public void execute();
+ }
+ public class Runner {
+	public void run(Executable e) {
+		e.execute();
+	}
+ }
+ public class Organizer {
+  psvm {
+	Runner r = new Runner();
+	//Old way
+	r.run(new Executable() {
+	  sop("Executable from Organizer");
+	});
+	
+	//Lambdas way
+	r.run(() -> {sop("Executable in a Lambdas way");});
+  }
+ }
+ Note: In Lambda, there is no requirement invoke the function execute(); because we know that the enclosure will have only one method.
+  
+ Java Old vs Java 8 
+  Interfaces can have abstract methods only . Now Interfaces can have abstract methods and also concrete methods.
+                                              The concrete methods in the interface are called 'default methods'.    
+                                              If classes implement such interfaces, Java supports a kind of Multiple inheritance.
+											  However, the interfaces cannot have variables whose state can be altered by the the default methoda
+											  
+java.util.function											  
+					
+---------------					
+@FunctionalInterface
+public interface Predicate<T>
+Represents a predicate (boolean-valued function) of one argument. 
+This is a functional interface whose functional method is test(Object).
+
+		printFilter(nums, (x) -> {
+			System.out.println();
+			return x > MAX_INT;
+		});
+		printFilter(nums, (x) -> (x > MAX_INT));
+		printFilter(nums, (x) -> x > MAX_INT);
+		
+		//User of Predicate is the following
+		private static void printFilter(List<Integer> nums, Predicate<Integer> condition) {
+			for (Integer num : nums) {
+				if (condition.test(num))
+					System.out.print(" "+num);
+			}
+		}		
+		Note: The parameter to the single method is passed as a symbolic x
+
+Predicate returns just a true or false.		
+
+---------------
+
+Lambda
+Runnable r = () -> System.out.println("hello lambda!");
+Comparator<Integer> cmp = (x, y) -> (x < y) ? -1 : ((x > y) ? 1 : 0);
+Comparator<Integer> cmp = (x, y) -> {
+  return (x < y) ? -1 : ((x > y) ? 1 : 0);
+};
+
+
+Streams - leveraging multicore
+Traditionally, we used multithreaded via the keyword synchronized, but many subtle bugs arise from its misplacement.
+Java 8’s Stream-based parallelism encourages a functional programming style where synchronized is rarely used; 
+it focuses on partitioning the data rather than coordinating access to it.
+
+Remember Partition of MapReduce - Sort and Shuffle.
+
+Collections is mostly about storing and accessing data, whereas Streams is mostly
+about describing computations on data. The key point here is that Streams allows and
+encourages the elements within a Stream to be processed in parallel.
+
+Old
+public Article getFirstJavaArticle() {
+
+    for (Article article : articles) {
+        if (article.getTags().contains("Java")) {
+            return article;
+        }
+    }
+
+    return null;
+}
+
+New
+
+public Optional<Article> getFirstJavaArticle() {  
+    return articles.stream()
+        .filter(article -> article.getTags().contains("Java"))
+        .findFirst();
+}
+
+Stream is a collection of functions which can be evaluated. 
+Stream does not hold data; Data Structure holds data. YOu cannot point to a memory and say, here is the data. Stream is a collection of functions which can be evaluated. Stream is a non mutating collection of functions. 
+
+Stream is like an iterator.
+Pipeline pattern - Data flows through a pipe line, just as a liquid flows through a pipe line. For example, numberList.stream().filter(e->e%2 == 0).map(e-> e*2).collect(toList());
+
+http://virtualjug.com/streams-the-real-powerhouse-in-java-8/
+---
+ifPresent
+oelseget
+
+Optional<Any> o = Optional.of(...);
+OptionalConsumer.of(o).ifPresent(s ->System.out.println("isPresent "+s))
+            .ifNotPresent(() -> System.out.println("! isPresent"));
+			
+			
+----------------
+Concurrency
+
+ConcurrentMap is important for the exam. You should go the API description for this interface. In short:  It is a Map providing additional atomic putIfAbsent, remove, and replace methods.  Memory consistency effects: As with other concurrent collections, actions in a thread prior to placing an object into a ConcurrentMap as a key or value happen-before actions subsequent to the access or removal of that object from the ConcurrentMap in another thread.
+
+java.util.concurrent.CopyOnWriteArrayList; = Reader threads are not blocked.
+
+Remember that Future.get() will block until there is a value to return or there is an exception.
+
+------------------------
+
+
+Intermediate Operations - filter, map, limit, sorted, distinct
+Terminal Operations - collect, count, foreach
+
+Old Collection requires us to use External Iterator
+New Collection's streams help in internal iterator
+
+Filtering a stream with predicate
+Filtering unique elements in a stream
+Truncating a stream - limit
+Skipping elements - skip
+
+(Dish::getName) is called Function
+(d -> d.getName=='salad') is called a Predicate
+
+filter - input is s Stream<Element> and output is a Stream<Element>; limits the number of Elements, but does not alter the Type of the Element. Preserves the type, but changes the count.
+map - input is a Stream<Element>, but has a function that takes a single argument Element. The output can be a different Type. Example, .map(Person::getNameString). Preserves the count, but changes the type.
+reduce - brings a cummulative effect, bringing things together.
+
+----------------------
+in[] myIntArray = {1,2,3};
+int sum =  Arrays.stream(myIntArray).sum(); 
+
+//in this example a[] and b[] are same length
+int[] a = ...
+int[] b = ...
+int[] result = new int[a.length];
+IntStream.range(0, a.length)
+        .forEach( i-> result[i] = a[i]* b[i]);
+----------------------
+
+http://www.deadcoderising.com/2015-05-19-java-8-replace-traditional-for-loops-with-intstreams/
+https://www.youtube.com/watch?v=HVID35J7h_I
+
+
+-----------------------
+
+What are the new features introduced in JAVA 8?
+
+
+There are dozens of features added to Java 8, the most significant ones are mentioned below −
+
+Lambda expression − Adds functional processing capability to Java.
+Method references − Referencing functions by their names instead of invoking them directly. Using functions as parameter.
+Default method − Interface to have default method implementation.
+New tools − New compiler tools and utilities are added like 'jdeps' to figure out dependencies.
+Stream API − New stream API to facilitate pipeline processing.
+Date Time API − Improved date time API.
+Optional − Emphasis on best practices to handle null values properly.
+Nashorn, JavaScript Engine − A Java-based engine to execute JavaScript code.
+
+refer spring annotations, spark api, storm api, some concepts,
+
+-------------------------------------------
+
+List<Integer> values = ...
+values.forEach((Integer)-> System.out::println)
+values.forEach(() (param list) -> body of the function)
+
+
+---------------------------------------- Functional Programming -----------------------------------------------
+
+Imperative programming - the explicity iterator way. The HOW is written in a sequence of statements - Akin to the OOP
+Declarative programming - the implicit iteratory way. The WHAT is written. The HOW is left to the library. Akin to the FP.
+
+
+
+Use Optional<T> as a return type if you have to return null
+
+Avoid throwing Exceptions from functions
+
+Aim to write pure functions that respect referential integrity (idempotency)
+
+Functional Style programming vs Functional Programming
+
+
+Functions (like Comparator.comparing) that can do at least one of the following are called higher-order functions within the functional programming community:
+ Take one or more functions as parameter
+ Return a function as result 
+Example
+Function<String, String> transformationPipeline
+= addHeader.andThen(Letter::checkSpelling)
+.andThen(Letter::addFooter);
+Note: Understand this as Compound functions.
+Example - Calculator's sin, log functions can be passed with higher order functions

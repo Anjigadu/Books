@@ -1,0 +1,31 @@
+Welcome.jsp
+
+ <li><a href="<s:url action="Logon_input"/>">Sign On</a></li
+ 
+struts.xml
+
+<action name="Logon_*" method="{1}" class="tutorial.Logon">
+
+The framework invokes the input method on the Logon Action class.
+The "method={1}" attribute is replaced with "method=input".
+Since "input" is on a special list of methods that bypass validation, the validation framework is not invoked.
+
+package tutorial;
+import com.opensymphony.xwork2.ActionSupport;
+public class Logon extends ActionSupport {
+ 
+    public String execute() throws Exception {
+        if (isInvalid(getUsername())) return INPUT;
+        if (isInvalid(getPassword())) return INPUT;
+        return SUCCESS;
+    }
+.......
+}
+
+<action name="Logon" class="tutorial.Logon">
+  <result type="redirectAction">Menu</result>
+  <result name="input">/Logon.jsp</result>
+</action
+
+
+

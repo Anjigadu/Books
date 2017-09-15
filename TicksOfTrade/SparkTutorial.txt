@@ -1,0 +1,61 @@
+https://guestaccess.imperial.ac.uk/guestlogin/GuestLogin.aspx
+
+username
+
+conf11971
+
+
+Amazon Dataset
+fashio.json, electronics.json, sports.json
+
+
+RDD
+The dataset is divided into partitions
+
+cluster
+trnasform through spark context
+
+how many partitions does the RDD have ?
+data.getNumPartitions()
+
+difference between reduce vs groupByKey
+
+
+DataFrame API
+RDD vs DataFrame (Both are transformable)
+
+DataFrame has schema (two types - inferring schema and assigning schema)
+RDD does not have schema
+
+Why DataFrame over RDD?
+
+DataFrame knows the schema and hence is 5 times more performant than RDD.
+
+User defined functions are not performant as spark. because user defined functions take the controld from spark to java/python/scala. whereas spark functions execute in the spark's environment.
+
+clean data
+enrich data
+
+
+SQLContext
+
+New stuff: data Source api
+schema evolution - In paraquet, you can start from a basic schema and just adding new fields
+
+Run SQL directls on the file
+ In Paraquet files, run the ddql on the file itself as parquet has got structure
+ 
+ Partiion discovery
+  Table partitioning is used in systems like Hive
+  Data is normally stored in different directories
+  
+Data Set API
+ 
+ 
+ Complex anaysiss with minimal programming effort
+ 
+ 
+ Amazon Data set
+ https://
+ 
+ 

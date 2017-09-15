@@ -1,0 +1,77 @@
+http://www.complexevents.com/2006/08/01/what%E2%80%99s-the-difference-between-esp-and-cep/
+
+Event processing is a method of tracking and analyzing (processing) streams of information (data) about things that happen (events),[1] and deriving a conclusion from them. Complex event processing, or CEP, is event processing that combines data from multiple sources[2] to infer events or patterns that suggest more complicated circumstances. The goal of complex event processing is to identify meaningful events (such as opportunities or threats)[3] and respond to them as quickly as possible.
+
+wikipidea on Complex event processing
+Among thousands of incoming events, a monitoring system may for instance receive the following three from the same source:
+1.church bells ringing.
+2.the appearance of a man in a tuxedo with a woman in a flowing white gown.
+3.rice flying through the air.
+
+From these events the monitoring system may infer a complex event: a wedding. CEP as a technique helps discover complex events by analyzing and correlating other events:[6] the bells, the man and woman in wedding attire and the rice flying through the air.
+
+
+CEP includes event data analysis, but places emphasis on patterns of events, and abstracting and simplifying information in the patterns.
+
+http://softwareengineeringdaily.com/2016/02/04/stream-processing-vs-complex-event-processing/
+
+In StreamBase applications, events are represented by data records called tuples that flow through the query and application processing steps, which may in turn produce new events with data derived from this data. Tuples consist of one or more name-value pairs of data, called fields. Each field value has a specific data type. StreamBase provides a set of operators, data processing units that you can add and configure to apply your business logic on the streaming data
+
+
+Streambase
+
+Tuples - Name, data type, position
+
+Input Stream and Output stream 
+
+Operators that can apply your business logic on streaming data, such as aggregating tuples, or merging tuples, or retrieving data from a table. Each operator performs the work that you specify in its Properties view. 
+
+StreamBase Studio supports both graphical and text-based application development:
+EventFlow applications are XML files that are edited graphically using StreamBase Studio's EventFlow Editor. 
+StreamSQL applications are coded using a query language to describe the application and query streams of data. StreamSQL Applications are stored in text files with a .ssql extension. 
+
+
+
+Building EventFlow Applications 
+To create an EventFlow application in StreamBase Studio, you can drag and drop the icons for various components from a Palette View to the EventFlow Editor's drawing canvas.
+
+Building StreamSQL Applications 
+If you prefer to work with SQL queries instead of boxes and arrows, you can build applications using StreamSQL. StreamSQL will look familiar to SQL programmers, but there are some important differences. While SQL operates on tabular data that is stored somewhere on disk or in memory, StreamSQL supports operations on streams of continuously changing data.
+
+Applications As Modules
+
+Perspective in Eclipse = Modes
+                         SB Authoring Mode, SB Test/Debug
+Topology builder = SB Authoring						 
+
+Spout  = Input/OuputStream
+Bolt   = Operator
+Tuple  = Tuple
+         FeedSimulation (For Unit tests) Default, Data files, Custom, JDBC, 
+StreamGrouping by Fields = ~Filter Operator	(Eg- isQuote() will let only a quote to pass to the next processors, the rest are filtered)
+Edges  = Port (Stream port between nodes)
+       = Split (Splits the tuples to different operators on an order)
+       = Filter (Splits the tuples based on a if condition)	   
+Join
+
+Operators
+Filter
+Map  is changing the format of input to a different output format
+Union Operator is 
+
+Notes:
+Debugging can be done on the SB Authoring graph
+Component exchange has adapters for Linkedin, bloomberg, FIFA world cup e.t.c. 
+Aggregators - Tuple Dimensions - Aggregate tuples, say for every three tuples, make a count of price.
+Dynamic Variables is like a Static variable.
+Map functions can be configured to invoke java class's static functions.
+wowwwww - Streambase Java Operator is a bolt that holds Java code. Streambase operator creates 
+Java Concurrency is the important video
+Graphical way of creating the event flow is called EventFlow
+StreamSQL
+
+http://www.streambase.com/community/training/videos/
+	 
+		 
+		 
+		 

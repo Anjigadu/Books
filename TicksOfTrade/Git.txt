@@ -1,0 +1,86 @@
+Clone
+Clone and import maven would automatically bring it to the workspace.
+Clone would bring the project to the local git hub workspace. Then the project has to be imported to the local workspace.
+
+the green in the 
+
+Never do Force Update
+Don't directly make changes to the master. If you are making changes, check out a branch and complete merge with master. 
+
+How to delete the local changes and commits ?
+From a version just after fetch
+Reset -> Hard
+The local changes would be lost
+
+Doubt:
+when readme.md is created directly on the repository, it is difficult to push changes to the repository.
+.travis.yml is present in the root. Yet, there is a complaint that 'WARNING: We were unable to find a .travis.yml file.'
+
+Could not find .travis.yml, using standard configuration. (if the root of the repo is a folder, travis is not able to find the .travis.yml)
+But when the .travis.yml was added directly (without eclipse) into github, travis.yml recognized. However, travis complained that the pom was not present
+Also, adding a file directly in the root, prevented further commits from eclipse.
+
+Found a workaround
+
+
+
+.travis.yml
+language : java
+jdk:
+  - oraclejdk8
+sudo : required  
+
+
+
+----------- git commands --------------
+
+git config --global core.editor "'D:/Programs (x86)/Notepad++/notepad++.exe' -multiInst
+
+
+git clone https://github.com/rajeshso/gitlearn.git
+
+use "git add" to track files
+git add README
+git add pom.xml
+
+// untrack but not remove the file
+git rm --cached README.md
+
+//undo the modification and replace with the previous version
+git checkout -- src/main/java/com/test/misc/HashBucketConcept.java
+
+
+//If you want to check your settings, you can use the git config --list command
+to list all the settings Git can find at that point:
+git config --list
+
+//specific key’s value
+git config user.name
+
+//Help
+$ git help <verb>
+$ git <verb> --help
+
+//to know the contents that are changed and those are not staged
+git diff
+
+//what you’ve staged that will go into your next commit
+git diff --staged
+
+//you can use git diff in eclise too
+
+// Commit
+git commit -m "The First commit"
+
+//history
+git log
+// there are a number of options in log
+
+git log --pretty=oneline
+git log --pretty=format:"%h %s" --graph
+
+
+
+
+
+

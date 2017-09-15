@@ -1,0 +1,25 @@
+Use NBMongo plugin for Netbeans
+Download MongoDB that is appropriate for the OS
+In Windows 7, a hotfix had to be installed
+mongod  --dbpath C:\OCMJEE\mongodb\data --journal had to be executed to get mongoDB started.
+Prefer to install mongoDB through a MSI file. This will help you create a windows service.
+In the netbeans, enable the native tools by going to Options->Miscellaneous->Mongo-> Path -> Specify the path of the mongoDB
+The available native tools are Mongo Shell (a java script interpreter shell),mongodump, mongorestore, mongotop
+The mongoDB is available in Services explorer
+Its easy to create database, collection, document in netbeans
+The _id is automatically generated if the user does not specify. If you have to specify, specify it correctly.
+
+The shell is connected to test by default. 
+use FirstDatabase;
+
+This will connect to the database that you want to connect to.
+
+Queries
+db.FirstCollection.find()
+{
+"_id" : ObjectId("55198cf485a8a18d87ddee71")
+};
+
+This will give the entire document. All other keys can also be used to query.
+
+help in the shell lists all the commands

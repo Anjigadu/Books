@@ -1,0 +1,193 @@
+https://www.youtube.com/watch?v=aPDMDufkBSc
+Cucumber JVM set up in Eclipse in 10 minutes
+
+Eclipse does not like space for maven repositories. Configure a repository that does not have a space in the directories.
+
+Feature is a non-executable area. The compiler ignores the area.
+
+There should not be a space between Feature and : . It should be Feature: and not Feature :. This is applicable for all Gherkin syntax. If there is a space, the error is Parse exception.
+
+
+remove info.cukes:cucumber-jvm from your pom.
+
+There are three types of tests: Unit, Integration and Acceptance test (BDD).
+
+Feature
+Scenario
+Given
+
+One Feature has one to many Scenarios
+One Scenario has one to many steps
+Every step is linked to code
+The code can be java or selenium script
+The java or selenium script interacts with the your system under test
+
+A scenario is a test case
+
+Feature: This is a Checkout
+Scenario: Checkout a banana
+	Given the price of a "banana" is 40p 
+	When I checkout 1 "banana"
+	Then the total price should be 40p
+
+Remeber not to enter : after Given, When and Then. If you did, you will not find the missing code generated when you execute JUnit.
+
+Only one feature per file. But there can be multiple Scenarios
+
+
+There should be a JUnit class that links to cucumber. That is @RunWith(Cucumber.class). The @CucumberOptions will mention the location of feature files. When you run this class, you will find error, that indicates the Java steps to be implemented. Copy those step defintions and enter it in another file. Add the body for the steps as test cases.
+
+Remember that if you make errors in the feature file, you will find feature exception.
+
+
+-------------------------------------
+
+Gherkin Key words
+
+• Feature
+• Background
+• Scenario
+• Given
+• When
+• Then
+• And
+• But
+• *
+• Scenario Outline
+• Examples
+
+Example
+
+Background:
+Given I have chosen some items to buy
+And I am about to enter my credit card details
+
+
+Expressive Scenarios
+
+Scenario: Transfer funds from savings into checking account
+Given I have deposited $10 in my Checking Account
+
+@Given("I have deposited \\$(\\d+) in my (\\w+) Account")
+public void iHaveDeposited$InMyAccount(int amount, String accountType) {
+// TODO: code goes here
+}
+
+Note: In the above scenario, modify the @Given with regex to suit the real expectation.
+
+Given I have deposited $1 and a cucumber in my Account
+
+@Given("I have deposited \\$([01234567890]*) in my Account")
+public void iHaveDeposited$InMyAccount(int amount) {
+// TODO: code goes here
+}
+In the above example, [01234567890]* is the modification.
+
+@Given("I have deposited \\$(.*) in my Account")
+public void iHaveDeposited$InMyAccount(int amount) {
+// TODO: code goes here
+}
+
+
+Given I have 1 cucumber in my basket
+Given I have 256 cucumbers in my basket
+ @Given("I have (\\d+) cucumbers? in my basket")
+public void iHaveCucumbersInMyBasket(int number) {
+// TODO: code goes here
+}
+
+
+
+When two definitions actually mean the same step definition
+When I visit the homepage
+When I go to the homepage
+@When("I (?:visit|go to) the homepage")
+public void iVisitTheHomepage() {
+// TODO: code goes here
+}
+
+
+
+
+A background section in a feature file allows you to specify a set of steps that
+are common to every scenario in the file. Instead of having to repeat those
+www.it-ebooks.info report erratum • discuss
+steps over and over for each scenario, you move them up into a Background
+element. Here are a couple of advantages to doing this:
+If you ever need to change those steps, you have to change them in only
+one place.
+• The importance of those steps fades into the background so that when
+you’re reading each individual scenario, you can focus on what is unique
+and important about that scenario.
+
+Background:
+Given I have been issued a new card
+And I insert the card, entering the correct PIN
+And I choose "Change PIN" from the menu
+Scenario: Change PIN successfully
+When I change the PIN to 9876
+Then the system should remember my PIN is now 9876
+Scenario: Try to change PIN to the same as before
+When I try to change the PIN to the original PIN number
+Then I should see a warning message
+And the system should not have changed my PIN
+
+Background is like @setup in JUnit
+
+
+Data Table
+Then I should see a vehicle that matches the following description:
+| Wheels | 2 |
+| Max Speed | 60 mph |
+| Accessories | lights, shopping basket |
+
+@Given("^a board like this:$")
+public void aBoardLikeThis(DataTable arg1) throws Throwable {
+// Write code here that turns the phrase above into concrete actions
+// For automatic transformation, change DataTable to one of
+// List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
+// E,K,V must be a scalar (String, Integer, Date, enum etc)
+throw new PendingException();
+}
+@Given("^a board like this:$")
+public void aBoardLikeThis(DataTable table) throws Throwable {
+this.board = new ArrayList<List<String>>();
+for (List<String> row : table.raw()) {
+this.board.add(new ArrayList<String>(row));
+}
+}
+
+
+Tags
+Tags
+If subfolders are the chapters in your book of features, then tags are the sticky
+notes you’ve put on pages you want to be able to find easily. You tag a scenario
+by putting a word prefixed with the @ character on the line before the Scenario
+keyword, like this:
+@widgets
+Scenario: Generate report
+Given I am logged in
+
+@slow @widgets @nightly
+Scenario: Generate overnight report
+Given I am logged in
+And there is a report "Total widget sales history"
+
+features/
+widgets/
+slow/
+nightly/
+user_administration/
+
+If you want to tag all the scenarios in a feature at once, just tag the Feature
+element at the top, and all the scenarios will inherit the tag. You can still tag
+individual scenarios as well.
+@nightly @slow
+Feature: Nightly Reports
+@widgets
+Scenario: Generate overnight widgets report
+...
+@doofers
+Scenario: Generate overnight doofers report
+
+

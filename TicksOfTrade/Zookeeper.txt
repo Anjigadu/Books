@@ -1,0 +1,30 @@
+What is Zookeeper ?
+
+*Distributed applications require co-ordination
+- Develop your own service (lots of work) or use robust pre-existing Zookeeper
+
+*Distributed open source centralized co-ordination service for:
+ - Maintaining configuration information
+   - Example: Sharing config information across all nodes
+ - Naming Service
+   - Example: Find a machine across a cluster of 1000 nodes 
+ - Providing distributed synchronization
+  - Example : Locks, Barriers, Queues...
+ - Providing group services
+ - Example : Leader election and more
+* Zookeeper is reliable, distributed and fast
+
+https://www.youtube.com/watch?v=31jzI4b8PiY
+Zookeeper introduction
+
+Zookeeper cluster setup and config
+http://myjeeva.com/zookeeper-cluster-setup.html
+
+Set up and configure Storm and Zookeeper multi node cluster
+http://www.michael-noll.com/tutorials/running-multi-node-storm-cluster/
+
+Leader serice and follower service
+
+Clustering in storm requires Zookeeper
+High Availablity in Spark is through Zookeeper
+

@@ -1,0 +1,132 @@
+http://www.slideshare.net/ptgoetz/apache-storm-vs-spark-streaming
+
+
+
+JavaPairRDD<String, String> dataset = ...
+JavaPairDStream<String, String> windowedStream = stream.window(Durations.seconds(20));
+JavaPairDStream<String, String> joinedStream = windowedStream.transform(
+    new Function<JavaRDD<Tuple2<String, String>>, JavaRDD<Tuple2<String, String>>>() {
+        @Override 
+        public JavaRDD<Tuple2<String, String>> call(JavaRDD<Tuple2<String, String>> rdd) {
+            return rdd.join(dataset);
+        }
+    }
+);
+
+
+https://github.com/apache/spark/blob/master/examples/src/main/java/org/apache/spark/examples/JavaWordCount.java#L18
+
+ package org.apache.spark.examples; 
+19 
+ 
+20 import scala.Tuple2; 
+21 import org.apache.spark.SparkConf; 
+22 import org.apache.spark.api.java.JavaPairRDD; 
+23 import org.apache.spark.api.java.JavaRDD; 
+24 import org.apache.spark.api.java.JavaSparkContext; 
+25 import org.apache.spark.api.java.function.FlatMapFunction; 
+26 import org.apache.spark.api.java.function.Function2; 
+27 import org.apache.spark.api.java.function.PairFunction; 
+28 
+ 
+29 import java.util.Arrays; 
+30 import java.util.Iterator; 
+31 import java.util.List; 
+32 import java.util.regex.Pattern; 
+33 
+ 
+34 public final class JavaWordCount { 
+35   private static final Pattern SPACE = Pattern.compile(" "); 
+36 
+ 
+37   public static void main(String[] args) throws Exception { 
+38 
+ 
+39     if (args.length < 1) { 
+40       System.err.println("Usage: JavaWordCount <file>"); 
+41       System.exit(1); 
+42     } 
+43 
+ 
+44     SparkConf sparkConf = new SparkConf().setAppName("JavaWordCount"); 
+45     JavaSparkContext ctx = new JavaSparkContext(sparkConf); 
+46     JavaRDD<String> lines = ctx.textFile(args[0], 1); 
+47 
+ 
+48     JavaRDD<String> words = lines.flatMap(new FlatMapFunction<String, String>() { 
+49       @Override 
+50       public Iterator<String> call(String s) { 
+51         return Arrays.asList(SPACE.split(s)).iterator(); 
+52       } 
+53     }); 
+54 
+ 
+55     JavaPairRDD<String, Integer> ones = words.mapToPair(new PairFunction<String, String, Integer>() { 
+56       @Override 
+57       public Tuple2<String, Integer> call(String s) { 
+58         return new Tuple2<String, Integer>(s, 1); 
+59       } 
+60     }); 
+61 
+ 
+62     JavaPairRDD<String, Integer> counts = ones.reduceByKey(new Function2<Integer, Integer, Integer>() { 
+63       @Override 
+64       public Integer call(Integer i1, Integer i2) { 
+65         return i1 + i2; 
+66       } 
+67     }); 
+68 
+ 
+69     List<Tuple2<String, Integer>> output = counts.collect(); 
+70     for (Tuple2<?,?> tuple : output) { 
+71       System.out.println(tuple._1() + ": " + tuple._2()); 
+72     } 
+73     ctx.stop(); 
+74   } 
+75 } 
+
+
+
+
+
+
+// Count each word in each batch
+JavaPairDStream<String, Integer> pairs = words.map(
+  new PairFunction<String, String, Integer>() {
+    @Override public Tuple2<String, Integer> call(String s) throws Exception {
+      return new Tuple2<String, Integer>(s, 1);
+    }
+  });
+JavaPairDStream<String, Integer> wordCounts = pairs.reduceByKey(
+  new Function2<Integer, Integer, Integer>() {
+    @Override public Integer call(Integer i1, Integer i2) throws Exception {
+      return i1 + i2;
+    }
+  });
+  
+Submit applications into the spark cluster
+https://spark.apache.org/docs/1.1.0/submitting-applications.html
+
+  
+https://spark.apache.org/docs/1.4.0/api/java/index.html?org/apache/spark/api/java/JavaSparkContext.html
+
+https://www.youtube.com/watch?v=g171ndOHgJ0  
+
+
+
+JavaRDD<String> textFile = sc.textFile("hdfs://...");
+JavaRDD<String> lines = textFile.flatMap(new FlatMapFunction<String, String>() {
+  public Iterable<String> call(String s) { return Arrays.asList(s.split("\n")); }
+});
+JavaPairRDD<String, Integer> pairs = lines.mapToPair(new PairFunction<String, String, Integer>() {
+  public Tuple2<String, Integer> call(String s) {
+if (s.startWith("A"))  
+  return new Tuple2<String, Integer>(s, 1);
+else 
+ return new Tuple2<String, Integer>(s, 0);   }
+});
+JavaPairRDD<String, Integer> counts = pairs.reduceByKey(new Function2<Integer, Integer, Integer>() {
+  public Integer call(Integer a, Integer b) { return a + b; }
+});
+counts.saveAsTextFile("hdfs://...");
+r

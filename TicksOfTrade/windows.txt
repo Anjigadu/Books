@@ -1,0 +1,15 @@
+On Windows you can use netstat -ao to list all the in use ports along with the Process ID that owns the connection.
+
+
+
+To kill any particular process use the Taskkill command. For example to kill Chrome, run the command as:
+
+ Taskkill /IM chrome.exe /F
+
+ where /F is used to kill the process forcefully. You can also kill any particular process by using it’s ID, the tasklist command displays the process ID’s as well (you can see the PID column in the screenshot). To kill any process using it’s ID, run the command as:
+
+ Taskkill /PID 2704 /F
+
+ Now to kill multiple processes simultaneously, run the above command with the PID’s of all the processes followed by spaces
+
+ Taskkill /PID 2704 5472 4344 /F

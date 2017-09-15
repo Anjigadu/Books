@@ -1,0 +1,30 @@
+For running inside Eclipse
+http://www.sonarlint.org/eclipse/index.html#FAQ
+Offline from the Sonar server
+
+For running outside Eclipse
+https://dzone.com/articles/static-code-analysis-and
+
+http://localhost:9000/
+
+New token "Rajesh" has been created. Make sure you copy it now, you won’t be able to see it again! 
+35848bff84aa517c657150908625e841caa09509
+https://sonarcloud.io/account/security
+
+rajeshso-github
+Rajesh Somasundaram's personal organization
+https://sonarcloud.io/account/organizations
+
+The following command is used to run the sonar in the sonarcloud.io
+mvn sonar:sonar \
+    -Dsonar.host.url=https://sonarcloud.io \
+    -Dsonar.organization=rajeshso-github \
+    -Dsonar.login=35848bff84aa517c657150908625e841caa09509
+	
+Sonar Travis CI Integration
+https://docs.travis-ci.com/user/sonarcloud/
+https://docs.travis-ci.com/user/encryption-keys/	
+
+https://www.youtube.com/watch?v=pNr38gMWvHQ
+https://marketplace.eclipse.org/content/early-security-vulnerability-detector-esvd
+

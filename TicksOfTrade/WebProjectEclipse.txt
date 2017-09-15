@@ -1,0 +1,30 @@
+Select a maven project
+Use this archetype
+<dependency>
+	<groupId>org.codehaus.mojo.archetypes</groupId>
+	<artifactId>webapp-javaee6</artifactId>
+	<version>1.5</version>
+</dependency>
+If this archetype is not available, it is possible to add it to eclipse in the same window. You can type them there.
+
+In the plugins of the pom, replace the default compiler plugin with tomcat or websphere or any of the runtime plugin. The dependency is only the jar. The job or work will be done by the plugin.
+
+
+-----------------------
+
+
+When you are creating a project, select Spring MVC project. For the first time, Spring will download a lot of templates. It creates a sample with a home controller too.
+
+New->Spring project-> Spring MVC project
+
+Prefer the annotation based configuration. This is the preferred method than xml.
+
+----------------
+
+	<a href="/mvc/spittles">Spittles</a>
+	|
+	<a href="/register">Register</a>
+The first one is right. The second one is incorrect.
+The first one makes it http://localhost:8080/mvc/spittles
+The second one becomes http://localhost:8080/register
+---------------

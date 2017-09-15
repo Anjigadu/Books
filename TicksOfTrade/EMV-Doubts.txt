@@ -1,0 +1,2 @@
+Does the Terminal application same for VSDC, M/Chip, Paypass, qVSDC and private label EMV cards?
+Is it possible that the tokenization be implemented for Chip-PIN Cards (not mobiles) ? If that is possible, would the terminal application change? The reason I am asking is because PAN will no longer be shared as part of SDA or DDA authentication.

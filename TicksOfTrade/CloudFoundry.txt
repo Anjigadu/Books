@@ -1,0 +1,54 @@
+cf --version
+
+Auth and select the org space you want to push 
+cf login 
+
+E:\Raj\TicTacToeRepo\TicTacToeGame\build\libs>cf push TicTacToe -p TicTacToe-0.1.0.jar -t 180
+
+Use liberty buildpack for java. DO not use java-buildpack
+
+Try with manifest.yml in the root, and use liberty build pack
+
+cf restage
+cf routes
+cf delete-route
+cf domains
+cf delete-app (check the syntax - this is for cleaning the app)
+Worker applications - A Non Web app, that can be used for tasks such as schedulers or the one triggered by databases
+cf set-env is used to set environment variables
+It is also possible to set environment variable through manifest.yml file.
+cf logs YOUR-APP-NAME
+
+Use a BackingService to hold state.
+You can't store anything that needs to persist on the filesystem of the web application; use a backing service.
+
+------------------------------
+
+The Twelve Factors
+I. Codebase
+One codebase tracked in revision control, many deploys
+II. Dependencies
+Explicitly declare and isolate dependencies
+III. Config
+Store config in the environment
+IV. Backing services
+Treat backing services as attached resources
+V. Build, release, run
+Strictly separate build and run stages
+VI. Processes
+Execute the app as one or more stateless processes
+VII. Port binding
+Export services via port binding
+VIII. Concurrency
+Scale out via the process model
+IX. Disposability
+Maximize robustness with fast startup and graceful shutdown
+X. Dev/prod parity
+Keep development, staging, and production as similar as possible
+XI. Logs
+Treat logs as event streams
+XII. Admin processes
+Run admin/management tasks as one-off processes
+
+------------------------------
+

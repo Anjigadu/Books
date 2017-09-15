@@ -1,0 +1,547 @@
+Big data can be best defined by thinking of three Vs: Big data is not just about Volume, but also about Velocity and Variety
+Volume - terabytes, petabytes
+Velocity - real time or near real time
+Variety - Social networks, blogs, logs
+
+Hadoop = Volume + Variety
+Stream proocessing = Velocity + Variety
+
+
+Stream processing is designed to analyze and act on real-time streaming data, using “continuous queries” (i.e. SQL-type queries that operate over time and buffer windows). Essential to stream processing is Streaming Analytics, or the ability to continuously calculate mathematical or statistical analytics on the fly within the stream. Stream processing solutions are designed to handle high volume in real time with a scalable, highly available and fault tolerant architecture. This enables analysis of data in motion.
+
+In contrast to the traditional database model where data is first stored and indexed and then subsequently processed by queries, stream processing takes the inbound data while it is in flight, as it streams through the server.
+
+Set up Ubuntu in Oracle VM
+http://www.homegeek.net/virtualbox/8-steps-prepare-virtualbox-ubuntu-1404-lts
+
+
+create a shared folder - DONE
+install required software in ubuntu
+run a sample program
+Chapter 1  HIA
+Study Plan with Miile stones
+
+/home/rajesh/WindowsShared
+e:/UbuntuShared
+
+
+
+
+
+Dec 12, 2015
+Where am I?
+
+I have set up a VM, Ubuntu, java, hadoop and eclipse. But am unable to start hdfs and yarn. The problem could be with the set up instructions in h2k pdf. The version used in pdf is different than the the 2.7.1 installation. Yet managed to find some source in google. the book has 2.5.1 and has some instructions.
+
+The next steps 
+Talk with the instructor to get the set up working. Write a hello world.
+Read some theory (Hadoop in action may help, but is too old version)
+
+Node (Big data) = machines
+Cluster -> racks -> nodes
+
+Two components
+HDFS - Storage
+Map Reduce - Processing
+
+hive: hql : processing for non-java programmers - converts to MR internally
+Pig : pig latin :
+hbase : nosql database :storage
+
+sqoop : import/export data to hadoop from RDBMS
+flume : import/export data to hadoop logs
+
+freespace
+
+
+
+HDFS
+
+Sharing the session ? how to access?
+
+Dec 21, 2015
+HDFS - Technical part
+
+jps - for the list of services
+
+can you please send the hdfs commands text file?
+namenode port is 50070
+localhost:50070 is the namenode url
+safemode 
+hadoopclient and hadoopcore jars, commons jars are required in the classath, export the jar file to execute
+
+conf/core-site.xml/ fs.default.name / localhost:54310
+
+hive and pig
+
+map-reduce
+
+map-reduce input/output details
+Input splits
+MR program parts - driver (client), mapper and reducer
+localhost:50030/jobTRACKER.JSP
+
+Dec 22, 2015
+To check with Rajii
+http://localhost:50070/dfshealth.html#tab-overview - Name Node information is successful
+hdfs://localhost:54310 - File System information not reachable. The browser redirects to google. This is an internal port and protocol. Not accessible for client.
+
+runsteps of map reduce - yet to be shared - NA
+hadoop jar <input path> <output path>
+hadoop fs -mkdir /user/hadoop/dir1 /user/hadoop/dir2 - Is it okay if I am directly specifying the directory path for the DFS ?
+hadoop fs mkdir is the facade for the hadoop dfs.
+hadoop dfs datanode is the internal for hadoop.
+
+
+wordcount.jar is client
+job tracker handles the individual task trackers . Each task tracker handles a block's mapper task. After all the mapper tasks are complete, one task tracker would be assigned to co-rreleate the reducer task. three files will be then generated - success/failure, part file and a log file.
+
+byte offset, content is the key, value for input for mapper
+number of input splits = number of mappers
+record reader
+reducer uses record writer to create part file.
+record writer - u can configure the format for the part file. 
+there are some popular input formats - keyvaluetextinputformat,  nlineinputformat, 
+output format - textoutputformat (default), mapfileoutputformat, sequencefileoutputformat
+
+combiners and partitions
+
+distribute the output to two files for a business logic
+number of reducers (mapred.reduce.tasks) should be equal to the number of output files.
+the default partioner is called hash partitioner
+
+
+assignment
+convert lines to a list of words and sort them. duplicates may or may not be repeated.
+
+all words that start with vowels to one part file, the rest should go to another part file.
+
+Solution
+
+Use NullWritable to suppress the values and use only keys. 
+
+Dec 24, 2015
+
+Start here
+Set up Eclipse - Set up, but could not use maven; so set up through app-get, now uanble to locate eclipse.
+Find a way to set up maven, integrate execution of hadoop programs from eclipse.
+ 
+Execute one map reduce program
+Use HDFS commands
+Use HDFS programs
+Use Word Count
+Browse Yarn and other chapter 2-5 theory
+
+Partitioners
+All keys are bifuricated by Partitioners
+Same key will always go to the same reducer
+No of reducers will be decided by developer
+default is 1
+the logic works on hashcode
+shuffle and sort 
+reducer aggregates the results
+
+Combiners
+Combiners can be used to reduce network traffic
+Combiners do a intermediate partition before the shuffle/sort phase. This reduces the overhead of the partitioner.
+Constraints for Combiners (vs Reducers)
+I/P and O/P key value types have to be same as Mappers
+Reducers can get data from diff/multiple mappers, where combiner can get input from only one mapper
+no of mapper = no of combiners
+
+x input splits - x mappers - x combiner - x partioner --- y sort and shuffle -- y reducers -- y output folders
+
+Speculative Execution
+
+Distributed Caching - Temproary data can be cached across machines. This data need not be loaded in HDFS.
+
+WordMapper.jar
+hadoop jar cache.jar 
+
+Evernote, Screen Snap, mapreduce unit (mrunit)
+
+Dec 24, 2015
+Set up Eclipse - Set up, but could not use maven; so set up through app-get, now uanble to locate eclipse.
+Find a way to set up maven, integrate execution of hadoop programs from eclipse.
+
+Remove default eclipse because it bought java 7 with it. we are into java 8. - DONE
+Install eclipse latest - DONE
+Install Maven 3.0.5 - DONE
+set up maven plugin - DONE
+set up mr plugin - To Check with Raji
+Write a mr program and execute  (https://wiki.apache.org/hadoop/WordCount) - DONE 
+Write a mr program and execute from eclipse - To Check with Raji - Its possible only with the hadoop eclipse plugin
+Write a mr program and use mr unit to unit test - To Check with Raji -
+
+The programs (except HDFS commands) are yet to be shared.
+
+Dec 25, 2015
+
+Assignment
+
+A file with DOB Name list
+1985 rajesh
+1982 Sunil
+1980 Sushil
+
+Output has to be two files - one with data with those who have DOB < 1982 and the rest with > 1982.
+
+Federation - Additional Name node to support the data nodes
+High Availablity - Backup Name node to support the data nodes.
+ There will be an Active name node and a passive name node. The passive node is the back up. Zookeper would help in toggling between the active and passive nodes.
+Yarn - 
+
+Refer the google images for the above concepts. 
+
+No of cores x 1.5 = Max No. of tasks that can be executed
+Example, 8 * 1.5 = 12 tasks
+
+Hadoop 1.0 vs 2.0
+
+in 2.0, you can have processing framework other than map reduce. Apache Giraffe, npp
+
+jobTRACKER is replaced with resource manager . rm talks with multiple node managers.
+
+(Yarn) resource manager is the first point of contact for map reduce job/task.
+
+Yarn resource manager would delegate it to the node manager.
+
+google images for yarn
+
+Lisa for testing hadoop programs. Licenced.
+MRUnit program also has to be exported as a jar to execute.
+
+Pig can be executed within eclipse.
+
+---------------------------------------------------
+
+WordCount problems:
+http://stackoverflow.com/questions/11715082/why-is-it-keep-showing-deprecated-error-when-running-hadoop-or-dfs-command
+
+Find out the content in the default hdfs directory, and then create two directories. 
+hadoop fs -ls hdfs:/
+hduser@rajesh-VirtualBox:/usr/hadoop-inst$ hadoop fs -mkdir hdfs:///tmp/input
+hduser@rajesh-VirtualBox:/usr/hadoop-inst$ hadoop fs -mkdir hdfs:///tmp/output
+Copy the input file into hadoop's fs hopper.
+hduser@rajesh-VirtualBox:/usr/hadoop-inst$ hadoop fs -copyFromLocal /usr/hadoop-inst/my-local-store/inputfileslocal/Hello.txt hdfs:///tmp/input
+
+No job jar file set.  User classes may not be found
+http://stackoverflow.com/questions/21379589/no-job-jar-file-set-user-classes-may-not-be-found-in-hadoop
+
+Unable to browse the file system in the browser - Permission denied error.
+localhost is replaced with 10.0.2.15 in core-site.xml
+
+----------------------
+
+
+Questions to ask Raji
+hadoop f -rmdir hdfs:///tmp/output 
+Is it possible to undo the rmdir? No
+In Unix, is it possible to undo a delete ? No
+
+
+Dec 29, 2015
+
+Fair Schedulers
+Hard core reservation option in Fair Scheduler
+
+
+Two format of files
+employee id , gender, salary
+
+gender, salary
+
+Output has to be total of male salaries and female salaries
+
+Have two mapper and one reducer.
+
+The addInputPath has to be as in the following:
+MultipleInputs.addInputPath(...)
+MultipleInputs.addInputPath(...)
+
+EndLineFormat
+SequenceFileFormat
+TextInputFormat - Key as a offset and Text as the lines (LongWritable and Text)
+
+www.hub4tech.com
+https://www.ted.com/talks/amy_cuddy_your_body_language_shapes_who_you_are?language=en
+http://livingforhadoop.blogspot.in/search/label/Hadoop
+
+Dec 30, 2015
+Pig
+
+Interactive mode <step by step>
+Batch or Script mode (pig -m <filename>.pig)
+Embedded mode <embedded in java>
+
+Installation is just unwrapping the tar and updating the .bashrc with PIG_HOME
+When Pig is started, it automatically connects to the HDFS
+ 
+Pig workflow
+Load
+Set of transformations
+Dump  (to view in the terminal) or Store
+
+Assignment
+
+input file
+patents   sub-patents
+1         0.12
+1         1.12  
+1         0.14 
+1         0.17 
+2         0.21  
+2         0.3
+
+Output
+1,4
+2,2
+
+Map Reduce program
+
+To Ask Raji
+Map reduce pgms - resrticted in google drive
+MR Unit sample
+Eclipse plugin for map reduce
+
+Dec 31, 2015
+PIG query format
+
+alias = statement
+
+A = LOAD 'sample.log' AS (schema, if known)
+B = GROUP A BY user'
+C = (transformations)
+STORE C INTO 'output'; // DUMP or STORE Caching
+dump C;
+
+dump or store is the execution point. execution happens here only.
+
+A = LOAD 'sample.log' AS (user:chararray, timestamp:int, query:chararray)
+
+A = LOAD 'sample.log' USING PigStorage(;) AS (user:chararray, timestamp:int, query:chararray)
+DUMP A;
+
+c= UNION A, C;
+
+Data  types
+
+Collection of tuple is a Bag.
+tuple is represented as (data)
+bag is represented as {(data), (data)}
+item is a every element in the data
+
+Transformations - Union
+
+
+hadoop fs -rmr <file path>
+
+A a 1
+B b 2
+char array, char array, int
+
+
+every coloumn in the input file can be represented as f1, f2, f3...fn or $0, $1, $2
+
+filter is like where clause
+
+split 
+- splits the output based on a condition
+the split can be dumped to screen or stored in differnt files.
+
+sample and limit
+x= sample c 0.01 would load 0.01 % of the data. like a mini statement.
+
+Limit 
+x = LIMIT c 3 -> Return only the first three records. c is any alias.
+
+Order By
+chck = order pig1 by f1 asc;
+dump chck;
+
+describe 
+describe the schema for the alias
+
+group by
+
+cogroup
+joins from multiple groups.
+
+cogroup ...inner can be used for inner, outer, right and left joins.
+
+normal join in sql is inner on both datasets
+
+user defined functions is udf
+
+Jan 04, 2016
+
+To Ask Raji
+Share - Recording of the sessions.
+
+Foreach ..GENERATE
+
+UDF - User defined Functions
+ 
+Oozie helps schedule pgms
+
+Illustrate  - helps in finding the execution plan.
+
+-------
+PL/SQL like of logic - Pig
+SQL like logic - Hive
+
+Hive
+
+Metadata is called metastore
+metastore is stored in a Apache Derby DB. 
+Derby DB is in client.
+
+user/hive/warehouse location has to be manyally created. 
+Any location is fine. this location has to be updated in the conf of hive.
+ 
+Managed Table, External Table
+External Table does not require movement of HDFS location to Hive
+Managed Table moves data from HDFS to Hive.
+External Table is good.
+
+show databases;
+create database test;
+drop database test;
+
+any hadoop command can be executed in hive shell; just avoid writing hadoop.
+
+Static Partion - the values for partition are  enteted as part of creation.
+
+Update of data is not possible
+Add data is possible
+  
+Dynamic partioning
+two properties have to be set to indicate its dynamic.
+IMPORTANT
+
+  
+Bucketing
+
+LOAD 'hdfs://localhost:54310/
+b = LOAD 'hdfs://localhost:54310/tmp/input/Temperature.txt' AS (user:chararray, timestamp:int, query:int);
+
+UDF
+
+---------------
+Dec 06, 2015
+
+HBase - Not a file system such as HDFS. HBase is a database built on top of HDFS. Coloumn oriented database.
+
+HMaster and HRegion Servers (nodes)
+
+HDFS Vs HBase
+
+HBase can be used without Hadoop
+HBase uses Key value store for storage.
+
+Foreign key relationship is called as Coloumn families.
+
+
+When Datawarehouse cannot handle data, use hadoop
+When RDBMS cannot handle data, use hbase
+
+FK Coloumn can have many rows - called versions- default is 3 versions
+all table cells are versioned
+timestamp is the key for the version.
+
+every row has a row key
+Value can be upto 2 GB
+Transactions for single row only.
+Index based on row key
+  
+Downside
+No Joins
+Limited Transactions
+No Normalization
+No FK relationship , but versioning is possible.
+
+TTL coloumn is Time to leave (short time memory)
+
+Put commands for insert or update rows
+
+scan 'tablename' will list the rows in the table
+
+disable 'table name' - for drop or alter or change its settings
+
+When deleting the row, enter timestamp. If not, all the versions of the row will be deleted.
+Good practice to use timestamp even when there is only one version.
+
+
+-------------------
+SQOOP
+
+Import and Export RDBMS to Hadoop
+
+installation - Note that the rdbms connector has to be present in both hadoop home and sqoop lib folder.
+
+Only a Map job is required. There is no reduce job.
+
+assignment
+use hive import 
+-------------------
+Flume
+
+Ingest Streaming data (typically file data) into HDFS
+
+-----------------
+
+
+Interview questions
+
+Input Split - IMPORTANT
+Record Reader - custom reader for excel, image files... to convert to key value
+Custom Reader - Note
+Default partioner in map reduce is hash partitioner
+hashpartioner : keyhashcode % no. of reducers
+
+difference between partioning and bucketing?
+when you will plan partioner and bucketing ?
+bucketing - 
+partioner  - dynamic  use cases
+
+Load statement in hive
+
+HDFS Federation : What is it? and how does it work?
+what is the specific service in federation ? - Multiple name nodes
+diff between federation and hi avaiablity.
+
+co-group in pig : different bags
+co group and grouping differnce. - more than one 
+join and grouping in Pig diffence
+
+case study:
+there are 6 reducers . how many sort and shuffle phases? Ans is 6.
+
+MR program - if there is no maper, what is the default mapper, if one is not written.
+if there is no reducer, what is the default reducer, is one is not written.
+
+identity mapper
+identity reducer
+How does this work? find a use case.
+driver - would dire.....
+
+
+sqoop
+default statement for sqoop statement
+default number of mappers that executed for a sqoop import - 4 mappers
+sqoop import is rdbms to hdfs 
+
+what are the services that will come up when u start hbase?
+Answer : hmaster and hregionserver
+
+remember the services for all the modules -- 
+
+why theory?
+know how many mappers would be generated for a custom record reader,
+
+pig advantages over hive
+distinct
+
+pig vs hive
+complex logic can be used in pig.
+

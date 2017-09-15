@@ -1,0 +1,50 @@
+http://stackoverflow.com/questions/27677581/configuring-jms-connectionfactory-in-mule
+
+How many instances of a spout and bolt are created to service n requests?
+How does parallelism affect the number of instances?
+
+Perfrormance testing Storm
+Use a publisher to publish messages to Storm
+Let a Spout listen to the topic
+
+Inside the cluster, calculate the instances that are created.
+
+Install Storm outside Eclipse
+Use a Storm UI to monitor
+Export the code from Eclipse and submit the topology
+
+Learn Grouping
+Learn Spout features
+Learn Bolt features
+
+
+https://github.com/ptgoetz/storm-jms
+http://hackersome.com/p/ducquoc/storm-jms
+https://github.com/ptgoetz/storm-jms/wiki/Example-Topology
+
+
+
+
+<!-- Show Spring where to search for the properties files -->
+<context:property-placeholder location="classpath:/camel/jms.properties" />
+
+<!-- The name of the queue from which we will take the messages -->
+<bean id="origin" class="org.apache.activemq.command.ActiveMQQueue">
+<constructor-arg value="${jms.origin}" />
+</bean>
+
+<!-- The name of the queue to which we will route the messages -->
+<bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
+<constructor-arg value="${jms.destination}" />
+</bean>
+
+
+
+jms.origin=Initial.Queue
+jms.destination=Routed.Queue
+
+
+-----
+
+Object pool implementation
+http://www.javacodegeeks.com/2013/08/simple-and-lightweight-pool-implementation.html

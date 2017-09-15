@@ -1,0 +1,91 @@
+What this project is about ?
+
+
+Have my many commits
+Set up a project
+
+321 commits
+live git markdown editor
+
+
+travis CI
+
+git shell
+
+Calculator is very generic
+
+
+comments only if its a public API for javadoc
+no need configuration
+
+
+typesafeconfig
+
+
+enum of FRUit
+(with constructor of price)
+
+no need of Item interface
+
+
+Inflection Point - Sandro
+
+
+easy to read, test
+
+too complicated - inflection point
+
+no public in interface
+
+
+Logger.error("", e)
+
+throw new EdfdfdException(e);
+
+
+Excetion Handlung
+
+sonar - need not be impotant
+
+No need TechnicalFailureException, just use Exception
+
+
+No @Ignore
+
+TestCalculator is CalculatorShould
+
+fail_instations_with_wrong_properties should be the method name
+no need final
+
+unit test template
+
+catch excetion template (no need printstacktrace, use runtimeexception)
+
+separate config and id 
+
+Configuration should be separate
+Calculator is too many responsiblities
+Calulatot - load file, parse, generate cost, offer calculation - WRONG
+
+
+static import
+
+
+lambda in new lines
+
+no comments for private methods
+no examples in comments
+
+
+getTotalCost - formatCostForCustomerPayment
+
+
+FileSystem is all over in code - centralise as a infrastructure
+
+
+force the person to deal with no item
+
+
+Offer is good
+
+too many features not required in the excercise

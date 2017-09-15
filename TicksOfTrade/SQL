@@ -1,0 +1,214 @@
+  SQL> sqlplus RAJESH/password@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(Host=localhost)(Port=1521))(CONNECT_DATA=(SID=xe)))
+ 
+ SQL> connect SYSTEM/password@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(Host=localhost)(Port=1521))(CONNECT_DATA=(SID=xe)))
+ 
+ To run a script
+ Find the path where the sql plus or sql developer accesses for the scripts.
+ sql developer - Do a save as to find the location
+ then save a script line by name RAJESH1.sql
+ 
+ then run the following line
+ @RAJESH1.sql;
+ 
+ save in a different location and run the following command.
+ @../../tmp/RAJESH1.sql; 
+ 
+ Data Dictionary
+ 
+ Gives access to all the system tables.
+ 
+ select * from dict order by table_name; 
+ 
+ SYSDBA access may be required. Use connect / as sysdba to grant access.
+ 
+ For space or any text in the output.
+ SELECT empno, '                ', ename FROM emp WHERE MGR = 7902; 
+ 
+ dual is a dummy table
+ select 123 * 456 from dual;
+ select sysdate from dual;
+ 
+ select ename, init, msal
+from employees
+where msal between 1300 and 1600;
+
+select empno, ename, init
+from employees
+where empno in (7499,7566,7788);
+
+select * from courses
+where description LIKE '%SQL%';
+
+SELECT empno,
+  ename,
+  CASE job
+    WHEN 'MANAGER'
+    THEN 'M'
+    WHEN 'SALESMAN'
+    THEN 'S'
+    ELSE 'C'
+  END
+FROM emp ;
+
+INSERT INTO USER_TABLE VALUES (SEQ_USER.NEXTVAL, 'Washington', 'George'); 
+
+SELECT * FROM employees WHERE ROWNUM < 10
+
+select round(345.678, 0), ceil(345.678), floor(345.678) from dual;
+
+DATE
+Use this statement to find the NLS_DATE_FORMAT used.
+SELECT * FROM SYS.NLS_SESSION_PARAMETERS; 
+If NLS_DATE_FORMAT is DD-MON-RR, then you may use 26-01-75.
+
+select bdate , extract(year from bdate) as year_of_birth , extract(month from bdate) as month_of_birth, extract(day from bdate) as day_of_birth
+from employees ;
+
+Join ON
+https://www.youtube.com/watch?v=ipOMQuLcQEg
+
+
+
+--produce an overview of all employees born after January 1, 1965, with a second
+--column showing the name of their managers
+SELECT e.ENAME, m.ename FROM employees e, employees m WHERE EXTRACT(year from e.bdate)<1974 and e.mgr = m.EMPNO order by e.mgr;
+
+SELECT e.ENAME, m.ename FROM employees e JOIN employees m ON e.mgr = m.EMPNO WHERE EXTRACT(year from e.bdate)<1974 order by e.mgr;
+
+SELECT ename, BDATE, MSAL, DEPTNO FROM employees NATURAL JOIN history;
+
+SELECT e.ename, e.bdate FROM employees e JOIN history h USING (EMPNO) WHERE e.job = 'admin'; 
+
+SELECT e.ename, d.deptno, d.location FROM employees e, departments d where e.deptno = d.deptno order by d.deptno, e.ename;
+
+
+-------------------- START UP MANUAL ---------------------
+TO start the server
+C:\Programs\oraclexe\app\oracle\product\11.2.0\server\bin>oradim  -STARTUP -SID XE -SYSPWD password
+
+TO shutdown the server
+oradim -shutdown -sid XE -SHUTTYPE SRVC,INST -SHUTMODE normal
+
+LSNRCTL start LISTENER
+
+To check the status of listeners. Look at listern.ora for the list
+lsnrctl stat 
+
+sqlplus SYS/password@XE as SYSDBA
+
+
+------------------------ Join ----------------------------------
+https://dzone.com/articles/10-easy-steps-to-a-complete-understanding-of-sql?utm_source=Top%205&utm_medium=email&utm_campaign=top5%202016-04-08
+
+6. SQL’s Different JOIN Operations
+
+JOIN operations essentially come with five flavours:
+•EQUI JOIN
+•SEMI JOIN
+•ANTI JOIN
+•CROSS JOIN
+•DIVISION
+
+These terms are commonly used in relational algebra. SQL uses different terms for the above concepts, if they exist at all. Let’s have a closer look:
+
+EQUI JOIN
+
+This is the most common JOIN operation. It has two sub-flavours:
+•INNER JOIN (or just JOIN)
+•OUTER JOIN (further sub-flavoured as LEFT, RIGHT, FULL OUTER JOIN)
+
+The difference is best explained by example:
+
+1
+-- This table reference contains authors and their books.
+2
+-- There is one record for each book and its author.
+3
+-- authors without books are NOT included
+4
+author JOIN book ON author.id = book.author_id
+5
+6
+-- This table reference contains authors and their books
+7
+-- There is one record for each book and its author.
+8
+-- ... OR there is an "empty" record for authors without books
+9
+-- ("empty" meaning that all book columns are NULL)
+10
+author LEFT OUTER JOIN book ON author.id = book.author_id
+SEMI JOIN
+This relational concept can be expressed in two ways in SQL: Using an IN predicate, or using an EXISTS predicate. “Semi” means “half” in latin. This type of join is used to join only “half” of a table reference. What does that mean? Consider again the above joining of author and book. Let’s imagine that we don’t want author/book combinations, but just those authors who actually also have books. Then we can write:
+1
+-- Using IN
+
+2
+FROM author
+
+3
+WHERE author.id IN (SELECT book.author_id FROM book)
+4
+5
+-- Using EXISTS
+6
+FROM author
+7
+WHERE EXISTS (SELECT 1 FROM book WHERE book.author_id = author.id)
+While there is no general rule as to whether you should prefer IN or EXISTS, these things can be said:
+•IN predicates tend to be more readable than EXISTS predicates
+•EXISTS predicates tend to be more expressive than IN predicates (i.e. it is easier to express very complex SEMI JOIN)
+•There is no formal difference in performance. There may, however, be a huge performance difference on some databases.
+
+Because INNER JOIN also produces only those authors that actually have books, many beginners may think that they can then remove duplicates using DISTINCT. They think they can express a SEMI JOIN like this:
+1
+-- Find only those authors who also have books
+2
+SELECT DISTINCT first_name, last_name
+3
+FROM author
+4
+JOIN book ON author.id = book.author_id
+This is very bad practice for two reasons:
+•It is very slow, as the database has to load a lot of data into memory, just to remove duplicates again.
+•It is not entirely correct, even if it produces the correct result in this simple example. But as soon as you JOIN more table references, you will have a very hard time correctly removing duplicates from your results.
+
+Some more information about abuse of DISTINCT can be seen in this blog post.
+
+ANTI JOIN
+
+This relational concept is just the opposite of a SEMI JOIN. You can produce it simply by adding a NOT keyword to the IN or EXISTS predicates. An example, where we’ll select those authors who do not have any books:
+
+1
+-- Using IN
+2
+FROM author
+3
+WHERE author.id NOT IN (SELECT book.author_id FROM book)
+4
+5
+-- Using EXISTS
+6
+FROM author
+7
+WHERE NOT EXISTS (SELECT 1 FROM book WHERE book.author_id = author.id)
+
+The same rules with respect to performance, readability, expressivity apply. However, there is a small caveat with respect to NULLs when using NOT IN, which is a bit out of scope for this tutorial.
+
+CROSS JOIN
+
+This produces a cross product of the two joined table references, combining every record of the first table reference with every record of the second table reference. We have seen before, that this can be achieved with comma-separated table references in the FROM clause. In the rare cases where this is really desired, you can also write a CROSS JOIN explicitly, in most SQL dialects:
+1
+-- Combine every author with every book
+2
+author CROSS JOIN book
+
+DIVISION
+
+The relational division is really a beast of its own breed. In short, if JOIN is multiplication, division is the inverse of JOIN. Relational divisions are very tough to express in SQL. As this is a beginners’ tutorial, explaining it is out of scope. For the brave among you, read on about it here, here, and here.
+
+What do we learn from this?
+
+A lot. Again, let’s hammer this into our heads. SQL is about table references. Joined tables are quite sophisticated table references. But there is a difference in relational-speak and SQL-speak. Not all relational join operations are also formal SQL join operations. With a bit of practice and knowledge about relational theory, you will always be able to choose the right type of relational JOIN and be able to translate it to the correct SQL.
+
+------------------------------------------------------------------

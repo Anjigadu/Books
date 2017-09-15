@@ -1,0 +1,153 @@
+What is the optimal way to write a singleton getInstance() method?
+Simply, without synchonization
+With double-checked synchronization on the volatile instance variable
+With double-checked synchronization on the instance variable
+With synchronization on the getInstance method
+
+
+
+Which of these is necessary to make an object immutable?
+No changes to any field after construction
+All fields must be final
+All methods must be final
+No references may be leaked during construction
+
+
+
+
+What is wrong with the following code?
+
+
+class Main {
+    public static void main(String[] args)
+    { 
+        IntStream.range(5, 10)
+                 .peek(i -> {
+                      System.out.println(i);
+                      if (i == 5) {
+                          throw new RuntimeException("got 5");
+                      }
+                  });
+    }
+} 
+The int stream is never boxed()
+The stream is never consumed
+A peek() lambda cannot throw an exception
+The range goes from [6 ... 10]
+
+
+
+What's the result of executing this code?
+
+
+class Main {
+    static class C {
+        public String m1(String str) {
+            return new String("string");
+        }
+
+        public String m1(Object obj) {
+            return "object";
+        }
+    }
+    
+    public static void main(String... argv) {
+        C c = new C();
+        
+        System.out.println(c.m1(null) == c.m1("hello!"));
+        System.out.println(c.m1(null));
+        System.out.println(c.m1("hello!"));
+    }
+} 
+false object string
+false string string
+true object string
+true object string
+
+
+
+
+What is the bug in this code?
+
+
+import 6.util.List;
+import 6.util.ArrayList;
+
+class Main {
+    public void test()
+    {
+        List numbers = new ArrayList();
+        numbers.add(10);
+        numbers.add("20");
+        for (Object n : numbers) {
+            System.out.println((int)n * (int)n);
+        }
+    }
+
+    public static void main(String... argv)
+    {
+        (new Main()).test();
+    }
+	
+	
+	Invalid cast in the println
+Invalid cast when adding to the list
+"20" is cast to ASCII codes
+Loop iteration variable should be Int, not Object
+
+
+
+
+Which of the following declarations generates a compile-time error?
+
+
+class Main {
+    public static void main(String... argv) {
+        Integer i = new Integer(null);
+ 
+        String s = new String(null);
+    }
+} 
+Both
+Neither
+Integer
+String
+
+
+
+
+What's the result of executing this code?
+
+
+class Main {
+    public static int getVal(int v) {
+        return v;
+    }
+    public static Integer getVal2(int v) {
+        return new Integer(v);
+    }
+    
+    public static void main(String[] args)
+    {
+        String s = "|" + (1 + 2) + "|" + 3 + 4 + "|" + getVal(5) + getVal(6) + "|" + getVal2(7) + getVal2(8); 
+
+        System.out.println(s);
+    }
+} 
+|3|34|56|78
+|3|7|56|78
+|3|7|11|78
+|3|7|11|15
+
+
+
+thread pool
+
+comparator  two one three four compareto (a1.charat0 - a2.charat 0)
+
+try static overriding and overloading
+
+compareTo and compare 
+
+java.util.Formatter
+java -cp and -classpath

@@ -1,0 +1,44 @@
+Apache Camel - Enterprise integration
+Apache CXF - Webservices RESTful
+Active MQ - Messaging
+Apache Karaf 
+
+
+Channel is queue
+File Endpoint provides access to file systems
+
+Content Base Routing - allows you to route messages to the correct destination based on the contents of the message exchanges
+
+Messaging - Send and forget, Send and Store
+
+Messaging
+File Transfer
+Shared Database
+RPI
+
+EIP			  				JMS            		WMQ
+Message Channel 	- 		Destination  - 		Queue
+Point to point channel- 	Queue	       - 	Queue
+Publish-Subscribe Channel- 	Topic       - 		Topic
+Message			- 			Message      - 		Message
+Message Endpoint        - 	Message Producer
+							Message Consumer
+
+JBoss Fuse stack
+
+Fuse = JBoss + Camel + Active MQ + CFX + Fabric + Red Hat support + IDE support
+
+There are some advantages of using the entire stack.
+Fuse Management console (hawtio) to track Camel.
+
+
+-Dmaven.multiModuleProjectDirectory=%M2_HOME%
+
+remember to select jaxb, if you want to parse an xml file.
+the xpath expression is 
+
+The errors are indeed useful. If you put -e or -X before the maven goal, there are more details.
+
+Christina Linn's Home loan video is useful
+
+The values entered in the UI is important. For example, the xPath expression or log expression.

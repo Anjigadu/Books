@@ -1,0 +1,122 @@
+
+
+set path=%path%;D:\Programs\sbt\bin
+
+[info] Assignment submitted successfully!
+[info]
+[info] You can see how you scored by going to:
+[info] https://www.coursera.org/learn/progfun1/programming/xIz9O/
+[info] and clicking on "My Submission".
+
+Scala cheatsheet
+https://www.coursera.org/learn/progfun1/supplement/Sauv3/cheat-sheet
+
+Glossary of terms
+http://docs.scala-lang.org/glossary/
+
+Learning resources
+https://www.coursera.org/learn/progfun1/supplement/D9pm0/learning-resources
+
+Variance - Different Variations or Flavours of a Theme
+
+Given A <: B
+
+If C[A] <: C[B], C is covariant  --- Co-operation
+
+If C[A] >: C[B], C is contravariant - Contradiction
+
+Otherwise C is nonvariant ---Equal 
+
+class C[+A] { ... } // C is covariant
+
+class C[-A] { ... } // C is contravariant
+
+class C[A]  { ... } // C is 
+-----------------------------
+
+Functions in a FP language are First class citizens: 
+This means: 
+ * They can be defined anywhere including inside other functions. 
+ * like any other value, they can be passed as parameters to functions and returned as results
+ * (Higher order functions) as for other values, there exists a set of operators to compose functions
+
+Why FP ?
+ Good for exploiting parallelism for multicore and cloud computing - Helps in parallelism and concurrency
+ --------------------------------
+
+Evaluation of a function - 
+Problem : Reduce the function expression as a value -> sumofSquares(9,2+2)
+Step 1 - Calculate the value of the individual function
+Step 2(a) - Combine the function by substituional model sum(9) returns 9 + sum(2+2) returns 4, they return 9^2 + 4^2 - Call by Value has the advantage that every funcntion is evaluated only once
+Step 2(b) - Another way is 9^2 + 4^2 .  - Call by Name has the advantage that its not evaluated if the corresponding value is not used in the function body ( call by name is affina)
+c++ , if c is going to remember that it is incremented, then it not mutable
+Does every function reduce to a value in a finite number of steps ? No, example is for..loop
+
+def test(x: int, y:Int) = x*x
+call by name - lazy but smart
+ test(2,3) = 2*2 = 4
+ test(3+4,8) = test(7,8) = 7*7 =49 
+ test(7, 2*4) = 7*7 = 49
+call by value - active, but once
+ test(2,3) = 2*2 = 4
+ test(3+4,8) = (3+4)* (3+4) = 7 * (3+4) = 7 * (7) = 49
+ test(7, 2*4) = test(7,8) = 7*7 =49 
+
+By default, Scala uses call by value. def constOne(x: Int, y: Int) - This is call by value
+def constOne(x: Int, y: => Int) - The => tells that this is a call by value expression. y : => Int is a call by value expression.
+
+tail recursion is encouraged. one stack frame is sufficient for the recursion.
+
+--------------------------
+ScalaStyle Check
+project/plugins.sbt
+addSbtPlugin("org.scalastyle" %% "scalastyle-sbt-plugin" % "0.8.0")
+in the command prompt, go to the root of the project where the build.sbt is present, do the following
+sbt scalastyleGenerateConfig
+sbt scalastyle
+
+
+Excercises
+https://github.com/jbutewicz/Coursera-Functional-Programming-Principles-in-Scala
+
+Difference between this and self. this would refer to the immediate class or trait. If self is provided as an alias, then the enclosing module's method would be used. 
+
+Move the control to a particular sub project
+sbt project <> 
+Then, test or compile or run
+
+Concurrency
+
+Shared State Concurrency - traditional 
+No Shared State Concurrency - Modern
+
+No Shared State Concurrency classification based on Parallelism
+1) Task Parallelism = Storm
+2) Data Parallelism = Map Reduce, Spark
+
+Concurrency classification based on Collaboration
+1) Parallel Workers - tradtional
+2) Assembly Pipeline - Storm
+3) Functional Parallelism - Akka
+
+
+
+Week call
+https://www.scala-exercises.org/std_lib/case_classes
+Manning Book
+Functional and Reactive Domain Modelling book
+Scala In Depth
+Coursera-Functional-Programming-Design-in-Scala
+excercism.io
+
+Manning - scala exercises - Functional DDD - Coursera - In Depth 
+
+
+What is the difference between List reduce and reduceLeft ?
+
+Case classes without parameter list is not permitted
+classes without parameter list is permitted
+case object without parameter list is permitted
+
+Check: Difference between tail recursion and linear recursion
+Can linear recursion result in stack overflow error ?

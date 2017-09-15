@@ -1,0 +1,23 @@
+
+
+How to avoid deadlock ?
+Avoid locks by using lock-free data structures (e.g. use a ConcurrentLinkedQueue instead of a synchronized ArrayList)
+2.Always acquire the locks in the same order, e.g. assign a unique numerical value to each lock and acquire the locks with lower numerical value before acquiring the locks with higher numerical value
+3.Release your locks after a timeout period (technically this doesn't prevent deadlocks, it just helps to resolve them after they've occurred)
+
+http://javarevisited.blogspot.co.uk/2010/10/what-is-deadlock-in-java-how-to-fix-it.html
+
+
+visualvm - to debug deadlocks
+jconsole - to debug deadlocks
+readwritelock is not part of concurrenthashmap in java 8
+how to create immutable objects and immutable collections
+lizkov principle in solid
+how to debug for deadlock?
+how to share objects between threads? BlockingQueue and its implementations
+callable vs runnable
+how get works in hashmap?
+why should keys in hashmap has to be immutable ?
+how to avoid cross site scripting and sql injection ?
+
+

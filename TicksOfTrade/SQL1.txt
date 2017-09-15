@@ -1,0 +1,154 @@
+SELECT * FROM departments;
+SELECT empno AS EMPLOYEE_NUMBER, ename, job, init, msal as SALARY FROM EMPLOYEES where deptno=30 order by msal desc;
+
+SELECT job, deptno FROM employees order by job;
+SELECT DISTINCT job, deptno FROM employees order by job; -- disticnt
+
+SELECT grade, upperlimit, lowerlimit FROM salgrades;
+SELECT grade, upperlimit-lowerlimit as difflimit FROM salgrades order by difflimit desc; -- coloumn expressions
+
+SELECT init ||' ABCDEF '||ename name ,12 * msal || '.00' yearsal FROM employees WHERE deptno = 10; -- concatenation of two coloumns, print formats
+
+SELECT 2+3 from dual;
+SELECT sysdate from dual;
+
+SELECT 'is true correct' AS condition FROM dual WHERE (1=1 OR 1=0) AND 1=1; -- Using Parentheses to Force Operator Precedence
+
+SELECT ename, init, msal FROM employees WHERE msal BETWEEN 1300 AND 1600; -- BETWEEN
+
+SELECT empno, ename, init FROM employees WHERE empno IN (7499,7566,7788);
+
+SELECT * FROM courses WHERE description LIKE '%SQL%'; -- Like
+
+SELECT ename,
+  job ,
+  CASE
+    WHEN job = 'TRAINER'
+    THEN ' 10%'
+    WHEN job = 'MANAGER'
+    THEN ' 20%'
+    WHEN ename = 'SMITH'
+    THEN ' 30%'
+    ELSE ' 0%'
+  END AS raise
+FROM employees
+ORDER BY raise DESC,
+  ename; -- Case expresssions
+  
+  
+SELECT DISTINCT attendee
+FROM registrations
+WHERE course IN
+  (SELECT code FROM courses WHERE category = 'BLD'
+  )
+ORDER BY attendee; --Subqueries
+
+--Provide the code and description of all courses with an exact duration of four days.
+SELECT code, description FROM courses WHERE duration = 4;
+
+--List all employees, sorted by job, and per job by age (from young to old).
+SELECT ename, job, bdate FROM employees order by job, bdate;
+
+--Which courses have been held in Chicago and/or in Seattle?
+SELECT description FROM courses where code IN (SELECT course FROM offerings WHERE location='CHICAGO' OR location = 'SEATTLE');
+
+--***** Which employees attended both the Java course and the XML course? (Provide their employee numbers.)
+SELECT empno FROM employees where empno in (select attendee from registrations where course='SQL' and course='XML');
+
+--List the names and initials of all employees, except for R. Jones.
+SELECT init, ename FROM employees where NOT (ename = 'JONES' AND init = 'R') ORDER BY init, ename;
+
+--Find the number, job, and date of birth of all trainers and sales representatives born before 1960
+SELECT empno, job, bdate FROM employees where (job='TRAINER' OR job='SALESREP') AND EXTRACT(year FROM bdate)<1960;
+
+--List the numbers of all employees who do not work for the training department.
+SELECT empno FROM employees where JOB<>'TRAINER' ORDER BY empno;
+
+--List the numbers of all employees who did not attend the Java course.
+SELECT empno FROM employees where empno not in (select DISTINCT attendee from registrations where course='JAV');
+
+--Which employees have subordinates?
+SELECT ename from employees where empno IN (SELECT distinct mgr from employees where mgr is not null);
+
+-- Which employees don’t have subordinates?
+SELECT ename from employees where empno NOT IN (SELECT DISTINCT mgr from employees where mgr is not null);
+
+--Produce an overview of all general course offerings (course category GEN) in 1999.
+SELECT description FROM courses where category = 'GEN' and code IN (select course from offerings where EXTRACT(year FROM begindate)=1999);
+
+--Provide the name and initials of all employees who have ever attended a 
+--course taught by N. Smith. Hint: Use subqueries, and work “inside out” toward
+--the result; that is, retrieve the employee number of N. Smith, search for the
+--codes of all courses he ever taught, and so on.
+SELECT init, ename FROM employees w
+
+--12. How could you redesign the EMPLOYEES table to avoid the problem that the COMM
+--column contains null values meaning not applicable?
+
+--13. In Section 4.9, you saw the following statement: In SQL, NOT is not “not.”
+
+
+
+--chapter 8 - retrieval from multiple tables and aggregation
+--overview of all employees, with a second column showing the name of their managers
+SELECT e.ename AS employee,
+  m.ename      AS manager
+FROM employees e,
+  employees m
+WHERE e.mgr=m.empno order by m.ename;
+
+--same question, but using join and on - note there is no comma between two tables and the where clause is replaced by ON
+SELECT e.ename AS employee,
+  m.ename      AS manager
+FROM employees e
+JOIN employees m
+ON e.mgr=m.empno
+ORDER BY m.ename;
+
+--natural join
+select empno, ename, begindate FROM employees natural join history order by empno;
+
+--Outer Join, right because department is specified after employees
+--Right give me more - that are not matching too
+SELECT d.deptno,
+  d.location ,
+  e.ename,
+  e.init
+FROM employees e,
+  departments d
+WHERE d.deptno = e.deptno(+) 
+ORDER BY d.deptno,
+  e.ename;
+  
+SELECT deptno,
+  d.location ,
+  e.ename,
+  e.init
+FROM employees e
+RIGHT OUTER JOIN
+  departments d
+  USING (DEPTNO)
+ORDER BY deptno,
+  e.ename;
+  
+  
+--GROUP BY
+--produce an overview showing the number of employees (the head count) per department
+SELECT deptno, count(empno) from employees group by deptno order by deptno;
+
+SELECT deptno, count(empno) from employees group by deptno ;
+
+--Produce an overview of the number of registrations per course.
+select course, count(attendee) as attcount from registrations group by course order by attcount;
+
+--Produce an overview of the number of registrations per course for every date.
+select course, begindate, count(attendee) as attcount from registrations group by course, begindate order by course;
+
+--Print the course with the maximum attendee count
+select max(y.attcount) FROM (select count(attendee) as attcount from registrations group by course) y;
+
+--Print the course with the maximum number of distinct attendee count
+select max(y.attcount) FROM (select count(distinct attendee) as attcount from registrations group by course) y;
+
+
+

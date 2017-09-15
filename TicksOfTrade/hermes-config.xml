@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config showDestinationsInMessageStore="false" base64EncodeMessages="true" scrollMessagesDuringBrowse="true" lookAndFeel="com.sun.java.swing.plaf.windows.WindowsLookAndFeel" enableJython="true" queueBrowseConsumerTimeout="0" selectorImpl="hermes.selector.JAMSELMessageSelectorFactory" correctDropSemantics="false" autoBrowseRefreshRate="10" maxColumnsInStatisticsTable="10" displayFactoryAdmin="true" copyJMSPriority="true" copyJMSReplyTo="true" copyJMSExpiration="true" copyJMSType="true" copyJMSCorrelationID="true" copyJMSProviderProperties="true" maxMessagesInBrowserPane="1000" messageFilesDir="C:\.hermes\.\messages" auditDirectory="C:\temp" maxThreadPoolSize="5" lastEditedByHermesVersion="v1.14" lastEditedByUser="my pc">
+    <classpathGroup id="ActiveMQ">
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\activemq-broker-5.9-SNAPSHOT.jar"/>
+        <library factories="org.apache.activemq.ActiveMQConnectionFactory,org.apache.activemq.ActiveMQSslConnectionFactory,org.apache.activemq.ActiveMQXAConnectionFactory" noFactories="false" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\activemq-client-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\activemq-console-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\activemq-rar.txt"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\activemq-jaas-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\activemq-kahadb-store-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\activemq-openwire-legacy-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\activemq-protobuf-1.1.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\activemq-spring-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\activemq-web-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\geronimo-j2ee-management_1.1_spec-1.0.1.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\geronimo-jms_1.1_spec-1.1.1.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\geronimo-jta_1.0.1B_spec-1.0.1.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\geronimo-jta_1.0.1B_spec-1.0.1.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\hawtbuf-1.9.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\insight-log-core-7.2.0.redhat-024.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\insight-log4j-7.2.0.redhat-024-patched.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\jcl-over-slf4j-1.7.5.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\slf4j-api-1.7.5.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\extra\mqtt-client-1.5.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\camel\activemq-camel-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\camel\camel-core-2.12.1.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\camel\camel-jms-2.12.1.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\camel\camel-spring-2.12.1.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\extra\mqtt-client-1.5.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\activeio-core-3.1.4.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\activemq-amqp-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\activemq-http-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\activemq-jdbc-store-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\activemq-jms-pool-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\activemq-leveldb-store-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\activemq-log4j-appender-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\activemq-mqtt-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\activemq-partition-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\activemq-pool-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\activemq-runtime-config-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\activemq-stomp-5.9-SNAPSHOT.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\commons-beanutils-1.8.3.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\commons-codec-1.6.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\commons-collections-3.2.1.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\commons-dbcp-1.4.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\commons-lang-2.6.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\commons-net-3.3.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\commons-pool-1.6.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\geronimo-j2ee-connector_1.5_spec-2.0.0.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\guava-12.0.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\hawtbuf-proto-1.9.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\hawtdispatch-1.17.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\hawtdispatch-scala-1.17.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\hawtdispatch-transport-1.17.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\hawtjni-runtime-1.8.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\httpclient-4.2.5.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\httpcore-4.2.4.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\jackson-core-asl-1.9.12.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\jackson-mapper-asl-1.9.12.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\jasypt-1.9.1.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\jasypt-spring3-1.9.1.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\jaxb2-basics-runtime-0.6.4.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\jettison-1.3.4.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\jmdns-3.4.1.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\leveldb-0.6.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\leveldb-api-0.6.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\leveldbjni-1.7.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\log4j-1.2.17.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\org.apache.servicemix.bundles.josql-1.5"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\org.linkedin.util-core-1.4.0.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\org.linkedin.zookeeper-impl-1.4.0.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\proton-api-0.5.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\proton-j-impl-0.5.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\proton-jms-0.5.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\scala-library-2.9.1.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\slf4j-log4j12-1.7.5.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\snappy-0.2.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\snappy-java-1.1.0-M4.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\spring-aop-3.2.4.RELEASE.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\spring-beans-3.2.4.RELEASE.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\spring-context-3.2.4.RELEASE.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\spring-core-3.2.4.RELEASE.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\spring-expression-3.2.4.RELEASE.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\spring-jms-3.2.4.RELEASE.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\spring-oxm-3.2.4.RELEASE.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\spring-tx-3.2.4.RELEASE.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\velocity-1.7.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\xbean-spring-3.14.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\xpp3-1.1.4c.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\xstream-1.4.4.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\optional\zookeeper-3.4.5.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\web\core-3.1.1.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\web\geronimo-servlet_2.5_spec-1.2.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\web\jdom-1.0.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\web\jetty-all-server-7.6.9.v20130131.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\web\jetty-websocket-7.6.9.v20130131.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\web\jolokia-core-1.1.4.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\web\json-simple-1.1.1.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\web\jsp-2.1-glassfish-2.1.v20100127.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\web\jsp-api-2.1-glassfish-2.1.v20100127.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\web\pax-url-aether-1.5.2.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\web\rome-1.0.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\web\sitemesh-2.4.2.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\web\spring-web-3.2.4.RELEASE.jar"/>
+        <library noFactories="true" jar="C:\Programs\apache-activemq-5.9-SNAPSHOT\lib\web\spring-webmvc-3.2.4.RELEASE.jar"/>
+    </classpathGroup>
+    <renderer className="hermes.renderers.DefaultMessageRenderer">
+        <properties>
+            <property value="false" name="bytesIsString"/>
+            <property value="false" name="bytesIsObject"/>
+            <property value="true" name="active"/>
+            <property value="100" name="messageCache"/>
+            <property value="65536" name="bytesIsObjectBufferSize"/>
+            <property value="false" name="toStringOnObjectMessage"/>
+        </properties>
+    </renderer>
+    <renderer className="hermes.renderers.DefaultMessageHeaderRenderer">
+        <properties>
+            <property value="true" name="active"/>
+        </properties>
+    </renderer>
+    <renderer className="hermes.renderers.ToStringMessageRenderer">
+        <properties>
+            <property value="true" name="active"/>
+        </properties>
+    </renderer>
+    <renderer className="hermes.renderers.HexMessageRenderer">
+        <properties>
+            <property value="true" name="active"/>
+        </properties>
+    </renderer>
+    <renderer className="hermes.renderers.XMLMessageRenderer">
+        <properties>
+            <property value="true" name="active"/>
+        </properties>
+    </renderer>
+    <renderer className="hermes.renderers.fix.FIXMessageRenderer">
+        <properties>
+            <property value="true" name="displayValueWithEnum"/>
+            <property value="true" name="active"/>
+            <property value="100" name="messageCache"/>
+            <property value="true" name="displayHeaderAndTrailer"/>
+        </properties>
+    </renderer>
+    <renderer className="hermes.renderers.EBCDICMessageRenderer">
+        <properties>
+            <property value="16" name="rowLength"/>
+            <property value="." name="undisplayableChar"/>
+            <property value="true" name="active"/>
+            <property value="5242880" name="maxMessageSize"/>
+        </properties>
+    </renderer>
+    <factory classpathId="System">
+        <provider className="hermes.providers.file.FileConnectionFactory">
+            <properties>
+                <property value="${hermes.home}/bin/messages" name="baseDirectory"/>
+            </properties>
+        </provider>
+        <connection>
+            <session audit="false" reconnects="0" id="Files"/>
+        </connection>
+        <destination domain="1" name="examples.xml"/>
+        <destination useLocalRenderer="true" durable="false" domain="1" name="fix.xml"/>
+        <extension className="hermes.ext.DefaultHermesAdminFactory">
+            <properties/>
+        </extension>
+    </factory>
+    <factory classpathId="ActiveMQ">
+        <provider className="org.apache.activemq.ActiveMQConnectionFactory">
+            <properties>
+                <property value="tcp://localhost:61616" name="brokerURL"/>
+            </properties>
+        </provider>
+        <connection connectionPerThread="false" clientID="">
+            <session useConsumerForQueueBrowse="false" audit="false" transacted="true" reconnects="0" id="ActiveMQ Rajesh"/>
+        </connection>
+        <destination durable="false" domain="2" name="dtcc.us.masterbroker"/>
+        <destination durable="false" domain="2" name="dtcc.uk.broker"/>
+        <extension className="hermes.ext.activemq.ActiveMQAdminFactory">
+            <properties/>
+        </extension>
+    </factory>
+    <quickFIX filterSessionMsgTypes="false" cacheSize="1024"/>
+</config>

@@ -1,0 +1,202 @@
+Adaptive Financial Consulting
+
+streams
+co-variance
+default methods interface vs abstract class
+lambda expression
+annonymous inner class - can use the variables of the encapsulated class if its final.
+diff between ant and maven
+
+Miki Travel
+
+rest service for HCE
+PCI Compliance
+secure coding
+soap vs rest
+Can you Clone a class that does not implement Clonable interface? no, we get 
+how to avoid cloning a singleton class  
+
+New features in Java 7
+Regex
+
+
+CGI
+restful client - code to securely connect
+runnable vs future
+collision in hash - it means there is a chance of duplication of the hashes for different objects
+algorithms for mac, symmetric and assymetric - what u have used, when and how
+
+restful client program
+restful client secure connection
+SDA, DDA, Offline PIN Enc - Detailing of the crypto builders, algorithms used, connecting with HSM, HSM functions used
+card - terminal interaction - secure connection, threats
+
+PCI Compliance - OWASP guidelines
+
+
+TCS
+Hibernate config to generate classes from oracle
+JSF lifecycle
+
+CGI-DCC
+tell me some annotations in spring
+Java CDI
+RSA vs DSA algorithms
+how to use both symmetric and assymetric keys for efficiency and security ? 
+
+March 02 - solocal
+visualvm - to debug deadlocks
+jconsole - to debug deadlocks
+readwritelock is not part of concurrenthashmap in java 8
+how to create immutable objects and immutable collections
+lizkov principle in solid
+how to debug for deadlock?
+how to share objects between threads? BlockingQueue and its implementations, exchanger
+callable vs runnable
+how get works in hashmap?
+why should keys in hashmap has to be immutable ?
+how to avoid cross site scripting and sql injection ?
+weak reference vs soft reference  vs strong reference
+runnable vs callable
+
+March 07, solcal
+CopyOnWrite/Read Lock?
+ConcurrentHashMap
+Fibonacci series
+five ways of doing singleton
+Factorial by recursion
+Whitebox in Mockito is an api used to set values of the private variables
+
+March 08, WJEC
+Failfast (HashMap) and fail safe iterator (ConcurrentHashMap)
+bean validation jsr 303
+uml realization 
+Type Erasure
+
+March 09, JP Morgan
+
+March 10, Expedia
+Kafka - offset, partitioning
+Kafka - Multiple consumers, Multiple instances of the same consumer spout, how is failover handled.
+Storm - How does failover happen?
+ArrayList vs LinkedList - performance of get, remove, put
+How does hashcode for HashMap work for key objects that have the same hashcode ?
+How immutable helps in HashMap keys? --  for mutable objects ,the hashCode() might be dependent on fields that could change, if this happens you wont be able to find the key (and its value) in the HashMap since hashCode() returns different value
+
+
+March 14, JP Morgan
+Spring Boot
+
+OWASP top 10
+
+March 14-18 Smart421
+Dependecy injection and its usefulness in unit testing
+
+
+bin/flume-ng avro-client -H localhost -p 41414 -F /usr/logs/10march2016/
+
+Lets consider the big file with 1 Million records as 1mrecords.csv
+upload 1mrecords.csv to HDFS.
+Run the ImportTsv job to transform the file into multiple HFiles according to a pre-configured table.
+Prepare and load the files in HBase.
+
+
+oozie job -oozie http://localhost:8080/oozie -config job.properties -date 10-mar-2016 -run
+
+
+March 21, 2016 Genpact interview - A very good collection of questions 
+insertion order in hashmap, array list
+union vs union all
+types of advices in spring aop
+spring kerberos authentication
+green threads vs native threads
+how to implement custom annotations
+clustered index vs non clustered index
+add cost for array list and linkedlist
+how to implement linkedlist
+deque
+linkedhashmap - how does it work?
+D in SOLID
+Timestamp vs Version
+what is pessimistic locking
+how to implement optimistic locking yourself
+country table has city and population. select the city with max population
+covariance
+interface, abstract class, private variable, private methods in UML notations
+thread scope in spring
+why is notify and notifyall in java.lang.Object and not elsewhere?
+good practices for indexes in databases
+tools used in oracle for oracle performance
+what is stackoverflow error and how does it occur.
+classnotfoundexception vs noclassdeffounderror
+binary tree
+Uses of immutable objects
+
+April 04, 2016 LCH Clearnet
+bucketing in hashcode -hashcode collision - IMPORTANT
+array list has Object[] as the only member variable, new Object[initialCapacity] is done in constructor - see array list source code
+linkedlist has LinkedList.Entry<E>, a header as the only member variable, header.next = header.previous = header in constructor
+limitations of mockito - it is not possible to mock static methods, use PowerMockito.mockStatic
+Difference between Where and Having in SQL
+
+Difference between XML and JSON
+April 06, 2016 18:00 Capgemini Interview . Panel : Arun Zachariah and Neil Adshead Leeds, 66752/ 5508
+1 year 
+back end developer
+govt digital service - guidelines
+leeds
+web-spring mvc-freemarker-restful - microservices- dropwizard-jackson/jetty/json , metric
+mockito
+mongodb (small)
+
+expand funtionality
+integration
+security
+microservices-spring mvc
+jenkins - deploy and ci
+git
+github
+regression suite- python - robot, selenium
+
+Show and Tell
+
+April 06, 2016 Genpact Headstrong/ Morgan Stanley
+Sort by more than one instance variables of a POJO in Java 7 and 8
+  SELECT country1.countryname, COUNT(city1.city) AS citycount
+  FROM City city1, Country country1 where country1.countryid = city1.countryid
+  GROUP BY city1.countryid  HAVING citycount>3
+  ); 
+
+select countryname from country where countryid not in (select countryid from city)
+
+country 
+countryid
+countryname
+
+city
+countryid
+city  
+
+unix - find files with the word exception
+unix - find all the processes that consumes more than a memory limit
+
+
+April 06, 2016, Smart 421, Aviva
+
+April 08, 2016, British Gas
+the parallel stream maintains threadpool with the number of threads equal to the number of processes. parallelization happens through threads.
+spring boot - how to embed server to run with spring boot, how does the dependencyjar for spring boot look like - a single jar. 
+yaml and properties only are supported for application.properties of spring boot
+spring profiles are like dev, preprod for different configurations
+application.properties
+spring boot microservices
+does restful api maintain session
+
+Active MQ vs Kafka
+
+April 18, 2016 Move Guides
+
+user_pk, user id, username are the colouumns. the userid is duplicated. Write a select statement that finds the duplicated rows using count, exists and other subquery techniques.
+
+The 
+{}

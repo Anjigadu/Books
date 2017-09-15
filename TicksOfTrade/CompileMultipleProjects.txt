@@ -1,0 +1,8 @@
+Compile multiple packages.
+javac ch01\team\*.java ch01\team\utils\*.java
+
+If there are more nested packages, build.xml or pom.xml is required
+
+
+
+

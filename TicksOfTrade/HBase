@@ -1,0 +1,49 @@
+To ask Raji
+
+How to copy data from hdfs to hive ? The load data command appears same
+--move  ----> Move to a different path in HDFS
+LOAD DATA INPATH '/usr/hadoop-inst/hadoop-1.0.3/hivedata' INTO TABLE
+page_view_from_hdfs;
+
+--copy
+LOAD DATA LOCAL INPATH '/home/geetha/pgms/hivepage' INTO TABLE
+page_view_from_local;
+
+Difference between Partition and Buckets
+
+How are Transactions supported in Hive ? 
+Directory level operations
+Row level and col level are supported only in HBase
+
+Can the same HDFS file be accessed from HBase, Hive and Pig ?
+Yes
+
+How does Delete and Update of rows from Hive or HBase work in HDFS ? Is this possible?
+Hive - No
+HBase - Yes
+When you delete or update from HBase, the HDFS file will not be changed.
+
+We have HDFS and all hadoop installation demoed in Ubuntu. Can this be done in windows ?
+Yes. Windows possible. Ubuntu preferred. Hadoop is friendly in Ubuntu.
+
+How to organize clustering config in hadoop ? *-site.xml ?
+ipaddress  - nodes.
+
+Update query for SQOOP
+
+Request Raji to share HBase and HDFS Commands file
+
+
+/usr/hadoop-inst/apache-hive-1.2.1-bin
+
+Data Architecture - DONE
+index in hbase - row key only?
+Hive vs PIG
+Splitter
+HBase, HDFS, MR, Pig, Hive Theory
+
+VP/Director
+Investment Bank
+Entrepreneur
+
+http://www.myhadoopexamples.com/2014/03/01/hadoop-mapreduce-example-with-partitioner/

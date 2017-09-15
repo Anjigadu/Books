@@ -1,0 +1,105 @@
+HSM basics 08:45 to 09:45 - Actual 12:15 pm
+What are Secure Server API and how did I build them? 09:45 to 10:45 - Actual 12:40
+What does a Key Management System do ? 10:45 to 11:30 (Actual 12:52)
+What are crypto applications and how to we build them? 11:30 to 12:00 OK
+how did i build SDA 12:00 to 12:15 OK
+how did i build DDA 12:15 to 12:45 OK 
+how does the secure communication happen between card - terminal - issuer ? 01:15 to 02:15 **** PENDING ****
+how does the browser and server communicate for SSL ? 02:15 to 03:00 OK 
+how did i use identity/LDAP ? 04:15 to 04:30 OK
+
+How to do XML Encryption and XML Decryption in Affina ? How to ensure hackers don't enter Affina ? 04:30 to 05:30 OK
+SSL configuration of the Websphere MQ Java/JMS client? (http://www.ibm.com/developerworks/websphere/library/techarticles/0510_fehners/0510_fehners.html) 05:30 to 06:30 OK
+OWASP guidelines 06:30 to 07:00
+
+OpenSSL overview and how it can be used 07:00 to 07:15 OK
+BouncyCastle overview and how it can be used OK
+
+how does a RESTFul client securely communicate with the server in Obopay ? 03:00 to 04:15
+
+Difference between different symmetric and assymetric algorithms OK
+
+
+Symmetric Algorithms
+DES
+3DES
+BlowFish (now TwoFish)
+AES
+
+DES - 64 bits - OLD Obsolete
+3DES - 64 bits - uses three keys - Requires HSM - Performance issues in SoftHSM
+BlowFish - BruceSchnier - 64, but good in software too.  Replaced by 124 bits of TwoFish
+AES - 124 bits POPULAR NOW - US Federal FIPS approved
+
+Asymetric algorithms
+RSA - 1 KB, 2KB, 3KB keys
+DSA - 1 KB, 2KB, 3KB keys - US Federal approved - faster decryption than enc
+ECC - 256 bytes - Used in mobiles, tablets - FIPS approved
+
+Hash and MACs
+Fixed length hash
+
+MAC vs Hash
+MAC has the identity of the key , but hash does not
+MAC is one of the item in certificates
+Hash does not use crypto algorithms . MAC uses crypto algorithms
+Hash not useful for security. MAC useful for security
+Hash useful for use cases such as check file integrity.
+
+Popular Hash Functions are
+MD5
+SHA-1
+SHA-2
+
+Popular MAC algorithms are
+UMAC
+VMAC
+
+Padding is used in block ciphers to make sure the blocks are 32, 64, 128 .....
+PKCS#5 padding
+Asymetric padding is used to randomize the output
+
+Local Master Keys (LMK)
+LMKs are not used for encrypting data, but are instead used to encrypt and decrypt other keys as these enter or
+leave the HSM. LMKs are a set of 40 DES keys.
+
+Zone Master Keys
+To securely exchange information between two users using the DES encryption scheme, it is vital to securely
+share a set of initial keys. This role is fulfilled by the Zone Master Keys. Unlike an LMK which does not leave
+the HSM, ZMKs are intended to be shared between sites to create secure Zones. The ZMK is distributed
+manually between the sites. The ZMK allow future (data encrypting) keys to be automatically shared between
+sites by encrypting those future keys with the ZMK.
+
+Key Check Value
+Zone PIN Key - A Data encrypting key
+
+HSM Commands
+
+Generate and Export SSL Server Certificate Signing Request - SG (CSR is generated and sent to CA)
+Import CSR - SI
+
+EMV Certificates are in DER format
+
+Security Server interface
+
+encrypt
+decrypt
+certificate sign request
+import key (from friend)
+export key (reverse)
+
+
+
+vulnerabilities:
+ 01 - Command Injection
+ 02 - Cookie Poisoning
+ 03 - Cross-Site Scripting (XSS)
+ 04 - HTTP Response Splitting
+ 05 - LDAP Injection
+ 06 - Log Forging
+ 07 - Path Traversal
+ 08 - Reflection Injection
+ 09 - Security Misconfiguration
+ 10 - SQL Injection
+ 11 - XPath Injection
+ https://marketplace.eclipse.org/content/early-security-vulnerability-detector-esvd

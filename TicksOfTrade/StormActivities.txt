@@ -1,0 +1,175 @@
+I have to send messages using a publisher that is executed as a thread.
+
+The bolt accepts only Connections, Sessions and MessageProducers.
+
+The Connections, Sessions and Producer has to be pooled, reused and closed during system shutdown.
+
+Although jmsTemplate is threadsafe, I am unable to use jmstemplate because it does not release the thread resources. The instance that creates the thread is not garbage collected.
+
+Also, jmsTemplate is singleton.
+
+The best is to use the Session pool mechanism.
+
+Start with the conneciton pool mechanism - DONE
+Get the end to end working - DONE
+Sort out the properties file - beans.xml config problem
+Get the multiple destination working
+Get the multiple connection factory destination working (if possible)
+Write unit tests, if possible.
+
+
+//Dynamic Topics is non performant. The dynamic topic is entered for use of topic when the system should not be stopped.
+The other alternative is to use in spring bean and reuse.
+The same cannot be done using the current system, because the topic is created from a session.
+
+July 01, 2015
+The end to end functionality is working well. The spout streams data to a topic
+
+TODO
+The host name and port should come from properties file. - DONE
+The subscriber has not received all the messages. The problem could be in publisher or subscriber. Or the connection factory may not be thread-safe. Or we need a Durable Subscriber.
+Implement CachingConnectionFactory. I tried, but met serialization problems.
+Add multiple topics - DONE
+The word file should have business keys or destinations to test multiple topics - DONE
+Validation and Error handling code
+Logging
+Audit error logs
+Figure out how to use unit tests
+Find ways for session pool performance enhancement
+
+Check if Mukesh's file transfer is thread-safe
+Move the deployment outside Eclipse
+
+July 02, 2015
+09:00 to 11:00 Chat
+11:00 to 15:00 Property files to beans.xml
+15:00 to 17:00 Implementing CachingConnectionFactory to receive all the messages  - Custom Serialization is the challenge
+17:00 to 18:18 Multiple topics complete    
+
+July 01, 2015
+09:00 to 10:30 Chat
+10:30 to 11:40 Discussion
+11:40 to 15:15 Chat
+
+July 07, 2015
+11:00 to 11:40 Chat
+11:40 to       Pool implementation
+
+
+Use the serverID to fetch the TopicConnectionFactory - DONE 
+Use the matching algorithm to fetch the TopicConnectionFactory - DONE
+
+July 15, 2015
+09:00 to 11:35 Sonar analysis - DONE
+11:35 to 15:25 Hermes JMS - DONE
+15:25 to 15:34 Sort out the ExampleJMSTopology publisher issue    
+15:34 to    Extensions Publishers - Template and Mediator patterns
+
+July 16, 2015
+10:28 to 18:00 Dynamic Publishers - WIP - The design is coming up. The crux is identified. The prototype has to be built.
+			 slf4j logging
+			 Sonar clean
+			 List negative test cases
+
+July 17, 2015
+09:00 to 11:00 Chat
+11:00 to 11:30 Clean code book review
+11:30 to  19:00 Dynamic Publishers - WIP - Init method of registry written. The next step is to use the key in the Router to fetch the TopicPublisher.
+
+Design Clean up - DONE
+Code Clean up - DONE
+Create Traditional Session Pools - NA
+Unit Test Cases with Mockito
+Integration Test Cases
+Pull up some functionality for PublisherFactory - DONE
+Use a JMSSpout to read the messages instead of the Word Spout
+Performance Test Cases
+
+July 19, 2015
+Bring the code under control - DONE
+Replace the older version of Publishers with the new one.- DONE
+ getPublishers() in router is responsible for fetching the Publishers - Replace it with your new implementation of fetching Publishers from the registry. - DONE
+            
+July 20, 2015
+11:05 to Create Traditional Session Pool - DEFERRED
+Find an alternative to pass jmsProvider into the Router or TopicFactory - TODO
+Unit Test Cases with Mockito - WIP
+
+July 21, 2015
+09:36 to 02:40 Unit test cases - NOT DONE
+02:40 to 08:00 pm Requirements document - DONE
+
+July 22, 2015
+10:27 to  17:00 Ramesh Excel sheet task
+17:00 to 19:14 Unit test cases PublisherRegistry and PublisherFactory - WIP 
+Try to soften the SessionRegistry problem, by making the registry as a microservice pattern - YET TO START
+
+July 23, 2015
+10:02 to Unit test cases
+Unproductive day
+
+July 24, 2015
+10:45 to Get the program to working condition
+04:00 to 05:15 Discuss the options for sequence
+
+July 26, 2015
+mockito
+pitest
+enable slf4j  logging and test with topology - DONE
+complete integration testing - DONE
+
+July 27, 2015
+09:00 to 10:20 Chat
+10:20 to 11:22 Mockito WIP
+11:22 to 12:30 CI server
+12:30 to 17:00 
+
+July 28, 2015
+09:00 to 10:00 Chat
+10:00 to 14:30 Mockito WIP
+14:30 to 16:00 Generic Pool implementation Discontinued
+16:00 to 18:00 PMI
+
+July 29, 2015
+10:00 to 10:47 Browse
+10:50 to 16:00 B
+16:00 to 17:00 Storm
+Github
+
+July 30, 2015
+10:00 to 10:27 Chat
+10:27 to 17:00 Storm ch2
+
+July 31, 2015
+09:00 to 09:38 Chat
+09:
+
+
+•Automated database testing (Redgate, T-SQLT, Visual Studio, DBfit
+quant analytic libraries
+
+Roadmap
+Install Sonar
+Beginning SQL - Read
+Hadoop Environment Setup
+Buy Release It
+
+Nov 25, 2015, Wednesday
+Mockito
+Career Plan
+Talk to Ramya, Nudge Leeada for BP reminder and DB NOC.
+
+
+Execution Plan
+Beginnig SQL - Faster early chapters with quick examples. Understand the later ones in detail.
+Oracle SQL - Browse for the key topics.
+
+What I'd like to know is: 
+What Is your vision--how will you contribute to global transformation?  
+What has held you back from living it until now?  
+Are you ready to take a giant leap forward to embrace your destiny? 
+Can you imagine a life in which your relationships are rich and rewarding? 
+Can you envision a life in which you have all the money you need for whatever you choose to do? 
+Can you embrace a life that is deeply meaningful and filled with purpose?  
+
+  

@@ -1,0 +1,112 @@
+
+MKDIR:
+=======
+Usage: hadoop dfs -mkdir <paths>	
+Rajesh : dfs was deprecated in favor of "fs" command.   
+
+Take path uri's as argument and creates directories. The behavior is much like unix mkdir -P creating parent directories along the path.
+
+Example:
+
+hadoop fs -mkdir /user/hadoop/dir1 /user/hadoop/dir2
+
+hadoop fs -mkdir 
+
+hadoop fs -rmdir hdfs://localhost:54310/usr/hadoop-inst/hadoop-1.0.3/training
+******************************************************************
+******************************************************************
+
+Write files from HDFS from local file system
+
+copyFromLocal:
+==============
+
+usage: hadoop fs -copyFromLocal /root/abc.txt /user/hadoop-1.0.3/....
+
+hadoop fs -copyFromLocal /home/geetha/pgms/pgm2 hdfs://localhost:54310/usr/hadoop-inst/hadoop-1.0.3/training
+
+
+PUT
+====
+
+Usage: hadoop fs -put <localsrc>...<dst>
+
+Copy single src, or multiple srcs from local file system to the destination filesystem. Also reads input from stdin and writes to destination file system
+
+hadoop fs -put /root/abc.txt /user/hadoop-1.0.3/....
+
+hadoop fs -put /home/geetha/pgms/pgm1 hdfs://localhost:54310/usr/hadoop-inst/hadoop-1.0.3/training
+
+
+******************************************************************
+******************************************************************
+
+
+READ files from HDFS:
+=====================
+
+Usage : hadoop dfs -ls <args>
+
+for a file returns stats on the file with the following
+
+hadoop fs -ls hdfs://localhost:54310/usr/hadoop-inst/hadoop-1.0.3/training
+
+
+******************************************************************
+******************************************************************
+
+
+Copy files from HDFS to localfile system
+=========================================
+
+hadoop fs -copyToLocal  hdfs://localhost:54310/usr/hadoop-inst/hadoop-1.0.3/training/pgm1 /home/geetha/pgms/test
+
+Use GET command as well (like PUT for local fs to HDFS)
+
+hadoop fs -get hdfs://localhost:54310/usr/hadoop-inst/hadoop-1.0.3/training/pgm1 /home/geetha/pgms/test1
+
+******************************************************************
+******************************************************************
+
+delete file/directory from HDFS:
+
+hadoop fs -rmr  /usr/hadoop-inst/hadoop-1.0.3/test
+
+******************************************************************
+******************************************************************
+
+safe mode leave command
+
+hadoop fs -safemode leave
+
+hadoop fs admin -safemode leave
+
+******************************************************************
+******************************************************************
+
+hadoop fsck /usr/hadoop-inst/hadoop-1.0.3 -files
+
+hadoop dfsadmin -report
+
+hadoop dfsadmin -refreshNodes
+
+******************************************************************
+******************************************************************
+sample java pgm:
+
+
+HDFSRead: This is used to display the contents of hdfs file:
+
+hadoop jar HDFSRead.jar HDFSRead
+
+hadoop jar jarname classname
+
+******************************************************************
+******************************************************************
+
+
+
+
+
+
+

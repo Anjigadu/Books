@@ -1,0 +1,57 @@
+01.31.05,user5,www.apache.com,6,12.23.28.37
+07.23.24,user6,www.pig.com,12,16.34.21.109
+05.16.16,user7,www.mapred.com,18,18.46.38.35
+09.18.47,user8,www.hdfs.com,64,28.52.89.102
+
+
+CREATE EXTERNAL TABLE websitedata(value STRING) LOCATION '/usr/hadoop-inst/my-local-store/hiveexternaltables/website';
+
+hadoop fs -copyFromLocal /usr/hadoop-inst/my-local-store/inputfileslocal/HiveInputFile.txt hdfs:///tmp/input
+
+LOAD DATA INPATH 'hdfs:///tmp/input/HiveInputFile.txt' INTO TABLE websitedata;
+
+show tables;
+
+drop table websitedata;
+
+CREATE EXTERNAL TABLE websitedata(doi DATE, person STRING, website STRING, hits int, ipaddress String) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' LOCATION '/usr/hadoop-inst/my-local-store/hiveexternaltables/website';
+
+hadoop fs -copyFromLocal /usr/hadoop-inst/my-local-store/inputfileslocal/HiveInputFile.txt hdfs:///tmp/input
+
+LOAD DATA INPATH 'hdfs:///tmp/input/HiveInputFile.txt' INTO TABLE websitedata;
+
+LOAD DATA INPATH 'hdfs:///tmp/input/HiveInputFile.txt' OVERWRITE INTO TABLE websitedata;
+
+
+CREATE TABLE page_view_from_local(doi DATE, person STRING, website STRING, hits int, ipaddress String) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES
+TERMINATED BY '\n';
+
+HiveInputFile2.txt
+
+01.31.09,user5,www.apache.com,6,12.23.28.37
+07.23.29,user6,www.pig.com,12,16.34.21.109
+05.16.19,user7,www.mapred.com,18,18.46.38.35
+09.18.49,user8,www.hdfs.com,64,28.52.89.102
+05.16.19,user9,www.mapred.com,18,18.46.38.35
+09.18.49,user10,www.hdfs.com,64,28.52.89.102
+
+hduser@rajesh-VirtualBox:~$ hadoop fs -copyFromLocal /usr/hadoop-inst/my-local-store/inputfileslocal/HiveInputFile2.txt hdfs:///tmp/input
+
+hive> dfs -ls l hdfs:///tmp/input
+
+CREATE EXTERNAL TABLE website_partitioned(doi STRING, person STRING, website STRING, hits int, ipaddress String) PARTITIONED BY (country STRING, city STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n';
+
+show partitions website_partitioned;
+
+LOAD DATA INPATH 'hdfs:///tmp/input/HiveInputFile2.txt' INTO TABLE website_partitioned PARTITION(country='US', city='NewYork');
+
+LOAD DATA LOCAL INPATH '/usr/hadoop-inst/my-local-store/inputfileslocal/HiveInputFile.txt' INTO TABLE website_partitioned PARTITION(country='UK', city='London');
+
+show partitions website_partitioned;
+
+select * from website_partitioned where country='US';
+
+Joins
+
+Use JDBC with Hive QL
+

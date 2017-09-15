@@ -1,0 +1,50 @@
+http://is.gd/flink_london
+
+What is Apache Flink ?
+The Streaming Era
+The Pyramid of Needs
+
+
+Traditional
+FLume Ingestion into HDFS 
+HDFS to Spark/Flink/MR to do analysis
+
+
+Lambda Architecture
+
+MQ ensured stream durablity and replay
+
+
+Counting Pyramid of Needs
+
+
+..queryable
+...accurate and repeatable
+...fault tolerant (exactly once)
+...efficientkt on high volueme streams
+with low latency
+continuous counting
+
+throughput (events/sec)
+
+Storm w kafka 400 events/sec in 10 machines
+flink w kafka 3,0000,o00 events/sec 
+flink without kafka 15,000,000 
+
+10 kafka brokers in 10 machines with 2 partitions
+
+
+Fault Tolerance - EXACTLY ONCE
+
+Flink Checkpoint
+Flink Savepoint
+
+
+RichMapFunction
+
+
+
+in linux, use vim pom.xml
+
+CCA - Easy
+CCP - Next stage
